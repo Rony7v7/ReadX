@@ -27,7 +27,7 @@ public class Main{
     public int showMenu() {
         int option = 0;
 
-        cleanScreen();
+        cleanScreen(false);
 
         System.out.print("\u001B[38;5;78m----------\u001B[3m BIENVENIDO \u001B[38;5;78m----------\n\n"+
                          " 1.\u001B[0m Registrar usuario \u001B[38;5;78m\n"+
@@ -42,12 +42,16 @@ public class Main{
         option = input.nextInt();
         input.nextLine(); // Limpiar
 
+        cleanScreen(false);
+
         return option;
     }
 
-    public void cleanScreen() {
-        System.out.print("Enter para continuar");
-        input.nextLine();
+    public void cleanScreen(boolean needEnter) {
+        if(needEnter) {
+            System.out.print("Enter para continuar");
+            input.nextLine();
+        }
 
         System.out.print("\033[H\033[2J");  
         System.out.flush();
@@ -56,9 +60,14 @@ public class Main{
     public void executeOption(int option) {
     
         switch (option) {
-            case 1: registerUser();
+            case 1:
+                registerUser();
+                cleanScreen(true);
                 break;
-            default: System.out.println("\nOpción inválida.");
+
+            default: 
+                System.out.println("Opción inválida.");
+                cleanScreen(true);
                 break;
 
         }
@@ -66,7 +75,32 @@ public class Main{
     }
 
     public void registerUser() {
+        String name;
+        String id;
+        int type;
+
+        String msg = "";
+
+        System.out.println("-------- REGISTRO DE USUARIOS --------\n");
         
+        System.out.print("Nombre: ");
+        name = input.nextLine();
+
+        System.out.println("Cédula: ");
+        id = input.nextLine();
+
+        do {
+            System.out.print("Plan de usuario"+"\n1.Estándar"+"\n2.Premium"+"\n>> ");
+            type = input.nextInt();
+            input.nextLine();
+
+            System.out.println("");    
+        } while (type < 1 || type >2);
+
+        msg = controller.registerUser(name, id, type);
+
+        System.out.println(msg);
+
     }
 
 }
