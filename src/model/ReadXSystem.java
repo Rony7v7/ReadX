@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ReadXSystem {
     
@@ -14,13 +15,14 @@ public class ReadXSystem {
     
     public String registerUser(String name, String id, int type){
         String msg = "\nUsuario registrado exitosamente.";
+        Calendar linkingDate = Calendar.getInstance();
         User user = null;
 
         switch (type) {
-            case 1: user = new UserStandard(name, id);
+            case 1: user = new UserStandard(name, id,linkingDate);
                 break;
 
-            case 2: user = new UserPremium(name, id);
+            case 2: user = new UserPremium(name, id, linkingDate);
                 break;
         }
 

@@ -103,4 +103,51 @@ public class Main{
 
     }
 
+    // public void registerProduct() {
+    //     String productType;
+    //     String name;
+    //     String pagesAmount;
+    //     String publishDate;
+    //     String url;
+    //     float price;
+    //     int pagesReadAmount;
+
+    //     //Books
+    //     String review;
+    //     int copiesSoldAmount;
+
+    //     //Magazines
+    //     int subscriptionsActivesAmount;
+    //     String issueAmount;
+
+    //     String msg = "";
+
+    //     System.out.println("-------- REGISTRO DE PRODUCTOS --------\n");
+        
+    //     System.out.print("Tipo de producto"+"\n1.Libro"+"\n2.Revista"+"\n>>  ");
+    //     productType = input.nextInt();
+    //     input.nextLine();
+
+    //     System.out.print("\nNombre: ");
+    //     name = input.nextLine();
+
+    //     System.out.print("\nNúmero de páginas: ");
+    //     pagesAmount = input.nextDouble();
+    //     input.nextLine();
+
+    //     System.out.print("\nFecha de publicación: ");
+    //     publishDate = input.nextLine();
+
+    //     System.out.print("\nURL de portada: ");
+    //     url = input.nextLine();
+
+    //     System.out.print("\nPrecio: ");
+    //     price = input.nextFloat();
+
+    //     System.out.println("\nTotal acumulado de páginas leidas: ");
+
+    //     System.out.println(msg);
+
+    // }
+
 }
