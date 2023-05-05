@@ -5,7 +5,7 @@ import java.util.Calendar;
 
 public class UserStandard extends User {
     
-    private ArrayList products;
+    private ArrayList<Product> products;
 
     public UserStandard(String name, String id, Calendar linkingDate) {
         super(name, id, linkingDate);

@@ -14,6 +14,7 @@ public class ReadXSystem {
     }
     
     public String registerUser(String name, String id, int type){
+
         String msg = "\nUsuario registrado exitosamente.";
         Calendar linkingDate = Calendar.getInstance();
         User user = null;

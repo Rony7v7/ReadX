@@ -81,20 +81,19 @@ public class Main{
 
         String msg = "";
 
-        System.out.println("-------- REGISTRO DE USUARIOS --------\n");
+        System.out.println("\u001B[38;5;78m-------- \u001B[3mREGISTRO DE USUARIOS --------\u001B[0m\n");
         
         System.out.print("Nombre: ");
         name = input.nextLine();
 
-        System.out.println("Cédula: ");
+        System.out.print("\nCédula: ");
         id = input.nextLine();
 
         do {
-            System.out.print("Plan de usuario"+"\n1.Estándar"+"\n2.Premium"+"\n>> ");
+            System.out.print("\nPlan de usuario"+"\n1.Estándar"+"\n2.Premium"+"\n>> ");
             type = input.nextInt();
             input.nextLine();
-
-            System.out.println("");    
+  
         } while (type < 1 || type >2);
 
         msg = controller.registerUser(name, id, type);
@@ -141,7 +140,7 @@ public class Main{
     //     System.out.print("\nURL de portada: ");
     //     url = input.nextLine();
 
-    //     System.out.print("\nPrecio: ");
+    //     System.out.print("\nPrecio de venta o suscripción: ");
     //     price = input.nextFloat();
 
     //     System.out.println("\nTotal acumulado de páginas leidas: ");
