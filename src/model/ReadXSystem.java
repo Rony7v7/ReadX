@@ -1,5 +1,7 @@
 package model;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -29,6 +31,36 @@ public class ReadXSystem {
 
         users.add(user);
 
+        return msg;
+    }
+
+    //Register book --- Throws exeception o un metodo de ingresar fecha
+    public String registerProduct(String name, int pagesAmount, String publishDateString, String url, 
+                                  float price, int pagesReadAmount, String review, int copiesSoldAmount) throws ParseException {
+        String msg = "";
+        Calendar publishDate = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        publishDate.setTime(format.parse(publishDateString));
+
+        
+        products.add(new Book(name, pagesAmount, publishDate, url, price, pagesReadAmount, review, copiesSoldAmount));
+    
+        return msg;
+    }
+
+    //register magazine
+    public String registerProduct(String name, int pagesAmount, String publishDateString, String url, float price, 
+                                  int pagesReadAmount, int subscriptionsActivesAmount, int issueFrecuency) throws ParseException {
+        String msg = "";
+        Calendar publishDate = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        publishDate.setTime(format.parse(publishDateString));
+
+        products.add(new Magazine(name, pagesAmount, publishDate, url, price, pagesReadAmount, 
+                                  subscriptionsActivesAmount, issueFrecuency));
+    
         return msg;
     }
 

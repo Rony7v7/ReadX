@@ -1,5 +1,12 @@
+/* 
+ * DUDAS:
+ * 
+ * Al registrar producto, las copias vendidas o suscripciones activas son = 0 ?
+*/
+
 package ui;
 
+import java.text.ParseException;
 import java.util.Scanner;
 import model.ReadXSystem;
 
@@ -12,7 +19,7 @@ public class Main{
         this.controller = new ReadXSystem();
         this.input = new Scanner(System.in);
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         Main view = new Main();
         int option = 0;
 
@@ -57,14 +64,22 @@ public class Main{
         System.out.flush();
     }
 
-    public void executeOption(int option) {
+    public void executeOption(int option) throws ParseException {
     
         switch (option) {
             case 1:
                 registerUser();
                 cleanScreen(true);
                 break;
+            
+            case 2:
+                
+                break;
 
+            case 3:
+                registerProduct();
+                break;
+                
             default: 
                 System.out.println("Opción inválida.");
                 cleanScreen(true);
@@ -102,51 +117,80 @@ public class Main{
 
     }
 
-    // public void registerProduct() {
-    //     String productType;
-    //     String name;
-    //     String pagesAmount;
-    //     String publishDate;
-    //     String url;
-    //     float price;
-    //     int pagesReadAmount;
+    public void registerProduct() throws ParseException {
+        int productType;
+        String name;
+        int pagesAmount;
+        String publishDate;
+        String url;
+        float price;
+        int pagesReadAmount;
 
-    //     //Books
-    //     String review;
-    //     int copiesSoldAmount;
+        //Books
+        String review;
+        int copiesSoldAmount;
 
-    //     //Magazines
-    //     int subscriptionsActivesAmount;
-    //     String issueAmount;
+        //Magazines
+        int subscriptionsActivesAmount;
+        int issueAmount;
 
-    //     String msg = "";
+        String msg = "";
 
-    //     System.out.println("-------- REGISTRO DE PRODUCTOS --------\n");
+        System.out.println("-------- REGISTRO DE PRODUCTOS --------\n");
         
-    //     System.out.print("Tipo de producto"+"\n1.Libro"+"\n2.Revista"+"\n>>  ");
-    //     productType = input.nextInt();
-    //     input.nextLine();
+        System.out.print("Tipo de producto"+"\n1.Libro"+"\n2.Revista"+"\n>>  "); //Validar
+        productType = input.nextInt();
+        input.nextLine();
 
-    //     System.out.print("\nNombre: ");
-    //     name = input.nextLine();
+        System.out.print("\nNombre: ");
+        name = input.nextLine();
 
-    //     System.out.print("\nNúmero de páginas: ");
-    //     pagesAmount = input.nextDouble();
-    //     input.nextLine();
+        System.out.print("\nNúmero de páginas: ");
+        pagesAmount = input.nextInt();
+        input.nextLine();
 
-    //     System.out.print("\nFecha de publicación: ");
-    //     publishDate = input.nextLine();
+        System.out.print("\nFecha de publicación ('dd/mm/aaaa'): ");
+        publishDate = input.nextLine();
 
-    //     System.out.print("\nURL de portada: ");
-    //     url = input.nextLine();
+        System.out.print("\nURL de portada: ");
+        url = input.nextLine();
 
-    //     System.out.print("\nPrecio de venta o suscripción: ");
-    //     price = input.nextFloat();
+        System.out.print("\nPrecio de venta o suscripción (en usd): ");
+        price = input.nextFloat();
 
-    //     System.out.println("\nTotal acumulado de páginas leidas: ");
+        System.out.print("\nTotal acumulado de páginas leidas: ");
+        pagesReadAmount = input.nextInt(); 
+        input.nextLine();
 
-    //     System.out.println(msg);
+        if(productType == 1) {
 
-    // }
+            System.out.print("\nReseña: ");
+            review = input.nextLine();
+
+            System.out.print("\nNúmero de ejemplares vendidos: ");
+            copiesSoldAmount = input.nextInt();
+            input.nextLine();
+
+            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, pagesReadAmount, review, copiesSoldAmount);
+
+        } else if(productType == 2) {
+
+            System.out.print("\nNúmero de suscripciones activas: ");
+            subscriptionsActivesAmount = input.nextInt();
+            input.nextLine();
+
+            System.out.println("\nPeriocidad de emisión");
+            System.out.print("1.Diario\n2.Semanal\n3.Mensual\n4.Anual\n\n>>"); //Validar
+            issueAmount = input.nextInt();
+            input.nextLine();
+
+            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, pagesReadAmount, 
+                                              subscriptionsActivesAmount, issueAmount);
+    
+        } 
+
+        System.out.println(msg);
+
+    }
 
 }
