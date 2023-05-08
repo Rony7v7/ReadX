@@ -37,7 +37,7 @@ public class ReadXSystem {
     }
 
     //Register book
-    public String registerProduct(String name, int pagesAmount, String publishDateString, String url,  float price, int pagesReadAmount, int genre, String review) {
+    public String registerProduct(String name, int pagesAmount, String publishDateString, String url,  float price, int genre, String review) {
 
         String msg = "\nBook registered succesfully";
 
@@ -53,7 +53,7 @@ public class ReadXSystem {
     }
 
     //register magazine
-    public String registerProduct(String name, int pagesAmount, String publishDateString, String url, float price,int pagesReadAmount, int category,int issueFrecuency) {
+    public String registerProduct(String name, int pagesAmount, String publishDateString, String url, float price, int category,int issueFrecuency) {
 
         String msg = "\nMagazine registered succesfully";
 

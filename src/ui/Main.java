@@ -1,9 +1,7 @@
 /* 
  * DUDAS:
  * 
- * Al registrar producto, las copias vendidas o suscripciones activas son = 0 ?
- * Interfaces para el tipo de productos??
- * 
+ * Al borrar productos se elimina de cada user?
  * 
  * 
 */
@@ -124,7 +122,6 @@ public class Main{
         String publishDate;
         String url;
         float price;
-        int pagesReadAmount;
 
         //Books
         int genre;
@@ -165,7 +162,7 @@ public class Main{
         if(productType == 1) {
 
             System.out.println("\nGenre");
-            System.out.print("1.Science Fiction \n2. Fantasy \n3. Historical novel \n>> ");  //Validar
+            System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel \n>> ");  //Validar
             genre = input.nextInt();
             input.nextLine();
 
@@ -185,7 +182,7 @@ public class Main{
             issueAmount = input.nextInt();
             input.nextLine();
 
-            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, category);
+            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, category, issueAmount);
     
         } 
 

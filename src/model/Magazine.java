@@ -18,6 +18,7 @@ public class Magazine extends Product {
         this.category = category;
         this.subscriptionsActivesAmount = 0;
         this.issueFrecuency = issueFrecuency;
+        this.id = generateId();
     }
     
     /**
@@ -60,6 +61,34 @@ public class Magazine extends Product {
      */
     public void setIssueFrecuency(int issueFrecuency) {
         this.issueFrecuency = issueFrecuency;
+    }
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //-------------------------------------------------
+
+    @Override
+    public String generateId() {
+        String alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String id = "";
+
+          for(int i = 0; i < 3;i++) {
+              id += alphanumeric.charAt((int)(Math.random()*alphanumeric.length()));
+  
+          }
+        return id;
     }
 
 }

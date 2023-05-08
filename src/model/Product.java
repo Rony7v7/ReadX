@@ -2,7 +2,7 @@ package model;
 
 import java.util.Calendar;
 
-public abstract class Product {
+public abstract class Product implements IdGenerator {
 
     private String name;
     private int pagesAmount;

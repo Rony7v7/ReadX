@@ -16,6 +16,7 @@ public class Book extends Product {
         this.genre = genre;
         this.review = review;
         this.copiesSoldAmount = 0;
+        this.id = generateId();
     
     }
     
@@ -62,9 +63,31 @@ public class Book extends Product {
         this.copiesSoldAmount = copiesSoldAmount;
     }
 
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //------------------------------------------------
+
+    @Override
     public String generateId() {
+        String hexadecimal = "0123456789ABCDEF";
         String id = "";
 
+          for(int i = 0; i < 3;i++) {
+              id += hexadecimal.charAt((int)(Math.random()*hexadecimal.length()));
+  
+          }
         return id;
     }
 
