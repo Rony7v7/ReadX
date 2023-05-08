@@ -7,14 +7,15 @@ public class Book extends Product {
     private int genre;
     private String review;
     private int copiesSoldAmount;
+    private String id;
 
-    public Book(String name, int pagesAmount, Calendar publishDate, String url, float price, int pagesReadAmount,int genre, String review, int copiesSoldAmount) {
+    public Book(String name, int pagesAmount, Calendar publishDate, String url, float price,int genre, String review) {
 
-        super(name, pagesAmount, publishDate, url, price, pagesReadAmount);
+        super(name, pagesAmount, publishDate, url, price);
 
         this.genre = genre;
         this.review = review;
-        this.copiesSoldAmount = copiesSoldAmount;
+        this.copiesSoldAmount = 0;
     
     }
     
@@ -59,6 +60,12 @@ public class Book extends Product {
      */
     public void setCopiesSoldAmount(int copiesSoldAmount) {
         this.copiesSoldAmount = copiesSoldAmount;
+    }
+
+    public String generateId() {
+        String id = "";
+
+        return id;
     }
 
 }

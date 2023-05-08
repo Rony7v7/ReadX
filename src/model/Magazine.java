@@ -9,15 +9,15 @@ public class Magazine extends Product {
     private int subscriptionsActivesAmount;
     private int issueFrecuency;
     private int category;
+    private String id;
 
-    public Magazine(String name, int pagesAmount, Calendar publishDate, String url, float price, int pagesReadAmount, int subscriptionsActivesAmount, int category,int issueFrecuency) {
+    public Magazine(String name, int pagesAmount, Calendar publishDate, String url, float price, int category,int issueFrecuency) {
 
-        super(name, pagesAmount, publishDate, url, price, pagesReadAmount);
+        super(name, pagesAmount, publishDate, url, price);
         
         this.category = category;
-        this.subscriptionsActivesAmount = subscriptionsActivesAmount;
+        this.subscriptionsActivesAmount = 0;
         this.issueFrecuency = issueFrecuency;
-
     }
     
     /**

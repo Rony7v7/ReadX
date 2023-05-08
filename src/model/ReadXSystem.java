@@ -47,7 +47,7 @@ public class ReadXSystem {
         publishDate.setTime(format.parse(publishDateString,new  ParsePosition(0)));
 
         
-        products.add(new Book(name, pagesAmount, publishDate, url, price, pagesReadAmount, genre, review, 0));
+        products.add(new Book(name, pagesAmount, publishDate, url, price, genre, review));
     
         return msg;
     }
@@ -62,7 +62,7 @@ public class ReadXSystem {
 
         publishDate.setTime(format.parse(publishDateString, new  ParsePosition(0)));
 
-        products.add(new Magazine(name, pagesAmount, publishDate, url, price, pagesReadAmount, 0, category,issueFrecuency));
+        products.add(new Magazine(name, pagesAmount, publishDate, url, price, category,issueFrecuency));
     
         return msg;
     }

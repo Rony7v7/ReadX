@@ -5,6 +5,7 @@
  * Interfaces para el tipo de productos??
  * 
  * 
+ * 
 */
 
 package ui;
@@ -58,7 +59,7 @@ public class Main{
 
     public void cleanScreen(boolean needEnter) {
         if(needEnter) {
-            System.out.print("Enter para continuar");
+            System.out.print("Enter to continue");
             input.nextLine();
         }
 
@@ -81,7 +82,7 @@ public class Main{
                 break;
                 
             default: 
-                System.out.println("Opción inválida.");
+                System.out.println("Invalid option.");
                 break;
 
         }
@@ -148,7 +149,7 @@ public class Main{
         pagesAmount = input.nextInt();
         input.nextLine();
 
-        System.out.print("\nPublish date ('dd/mm/aaaa'): ");
+        System.out.print("\nPublish date ('dd/mm/yyyy'): ");
         publishDate = input.nextLine();
 
         System.out.print("\nCover URL: ");
@@ -157,9 +158,9 @@ public class Main{
         System.out.print("\nSelling/Subscription price(USD): $");
         price = input.nextFloat();
 
-        System.out.print("\nTotal pages read: ");
-        pagesReadAmount = input.nextInt(); 
-        input.nextLine();
+        // System.out.print("\nTotal pages read: ");
+        // pagesReadAmount = input.nextInt(); 
+        // input.nextLine();
 
         if(productType == 1) {
 
@@ -171,7 +172,7 @@ public class Main{
             System.out.print("\nReview: ");
             review = input.nextLine();
 
-            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, pagesReadAmount, genre,review);
+            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, genre,review);
 
         } else if(productType == 2) {
 
@@ -184,12 +185,14 @@ public class Main{
             issueAmount = input.nextInt();
             input.nextLine();
 
-            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, pagesReadAmount, category,issueAmount);
+            msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, category);
     
         } 
 
         System.out.println(msg);
 
     }
+
+    
 
 }

@@ -11,14 +11,13 @@ public abstract class Product {
     private float price;
     int pagesReadAmount;
 
-    public Product(String name, int pagesAmount, Calendar publishDate, String url, float price, int pagesReadAmount) {
+    public Product(String name, int pagesAmount, Calendar publishDate, String url, float price) {
         this.name = name;
         this.pagesAmount = pagesAmount;
         this.publishDate = publishDate;
         this.url = url;
         this.price = price;
-        this.pagesReadAmount = pagesReadAmount;
-        
+        this.pagesReadAmount = 0;
     }
 
     /**
