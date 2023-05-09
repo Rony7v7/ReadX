@@ -1,8 +1,12 @@
 /* 
  * DUDAS:
  * 
- * Al borrar productos se elimina de cada user?
+ * Usar ennumeraciones
  * 
+ * Al borrar productos se elimina de cada user?
+ * Cómo buscar productos?
+ * 
+ * Como funcionan las referencias
  * 
 */
 
@@ -20,6 +24,7 @@ public class Main{
         this.controller = new ReadXSystem();
         this.input = new Scanner(System.in);
     }
+
     public static void main(String[] args) {
         Main view = new Main();
         int option = 0;
@@ -57,7 +62,7 @@ public class Main{
 
     public void cleanScreen(boolean needEnter) {
         if(needEnter) {
-            System.out.print("Enter to continue");
+            System.out.print("\nEnter to continue");
             input.nextLine();
         }
 
@@ -77,6 +82,7 @@ public class Main{
                 break;
 
             case 3:
+                modifyProduct();
                 break;
                 
             default: 
@@ -155,10 +161,6 @@ public class Main{
         System.out.print("\nSelling/Subscription price(USD): $");
         price = input.nextFloat();
 
-        // System.out.print("\nTotal pages read: ");
-        // pagesReadAmount = input.nextInt(); 
-        // input.nextLine();
-
         if(productType == 1) {
 
             System.out.println("\nGenre");
@@ -190,6 +192,104 @@ public class Main{
 
     }
 
-    
+    public void modifyProduct() {
+
+        String msg = "There are no products to modify.";
+
+        String id;
+        String productsInfo = controller.getProductsInfo();
+        String fullProductInfo = "";
+
+        //------- New parameters-----
+        int nProductType;
+        String nName;
+        int nPagesAmount;
+        String nPublishDate;
+        String nUrl;
+        float nPrice;
+
+        //-Books
+        int nGenre;
+        String nReview;
+
+        //-Magazines
+        int nCategory;
+        int nIssueAmount;
+
+        System.out.println("-------- MODIFY PRODUCT --------\n");
+
+        if(!(productsInfo.isBlank())) {
+
+            System.out.println(productsInfo);
+            System.out.print("Type product id: ");
+
+            id = input.nextLine();
+
+            //check if the product exists
+            nProductType = controller.getProductType(id);
+
+            if(nProductType != 0) {
+                fullProductInfo = controller.getFullProductInfo(id);
+            }
+            
+            System.out.println("\n"+fullProductInfo);
+
+            msg = "Id not found.";
+
+            if(!(fullProductInfo.isBlank())) {
+
+                System.out.println("\nFill in the data you wish to modify, otherwise type '0'");
+
+                System.out.print("\nName: ");
+                nName = input.nextLine();
+
+                System.out.print("\nAmount of pages: ");
+                nPagesAmount = input.nextInt();
+                input.nextLine();
+
+                System.out.print("\nPublish date ('dd/mm/yyyy'): ");
+                nPublishDate = input.nextLine();
+
+                System.out.print("\nCover URL: ");
+                nUrl = input.nextLine();
+
+                System.out.print("\nSelling/Subscription price(USD): $");
+                nPrice = input.nextFloat();
+
+                if(nProductType == 1) {
+
+                    System.out.println("\nGenre");
+                    System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel \n>> ");  //Validar
+                    nGenre = input.nextInt();
+                    input.nextLine();
+
+                    System.out.print("\nReview: ");
+                    nReview = input.nextLine();
+
+                    msg = controller.modifyProduct(id,nName, nPagesAmount, nPublishDate, nUrl, nPrice, nGenre, nReview, 0, 0);
+
+                } else if(nProductType == 2) {
+
+                    System.out.println("\nCategory");
+                    System.out.println("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
+                    nCategory = input.nextInt();
+
+                    System.out.println("\nIssue frecuency");
+                    System.out.print("1. Diary \n2. Weekly \n3. Monthly \n4. Yearly \n>> "); //Validar
+                    nIssueAmount = input.nextInt();
+                    input.nextLine();
+
+                    msg = controller.modifyProduct(id,nName, nPagesAmount, nPublishDate, nUrl, nPrice, 0, "0", nCategory, nIssueAmount);
+                }
+            }
+        
+        }
+
+        System.out.println(msg);
+    } 
+
+
+    //---------------------------------------------------
+
 
 }

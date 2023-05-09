@@ -67,5 +67,99 @@ public class ReadXSystem {
         return msg;
     }
 
+    //modify book
+    public String modifyProduct(String id,String name, int pagesAmount, String publishDateString, String url,  float price, int genre, String review, int category,int issueFrecuency) {
+
+        Product product = searchProductById(id);
+
+        if(!(name.equals("0"))) {
+            product.setName(name);
+        }
+        if(!(pagesAmount == 0)) {
+            product.setPagesAmount(pagesAmount);
+        }
+        if(!(publishDateString.equals("0"))) {
+            Calendar publishDate = Calendar.getInstance();
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            publishDate.setTime(format.parse(publishDateString,new  ParsePosition(0)));
+
+            product.setPublishDate(publishDate);
+        }
+        if(!(url.equals("0"))) {
+            product.setUrl(url);
+        }
+        if(!(price == 0)) {
+            product.setPrice(price);
+        }
+
+        //modify specific parameters
+        if(product instanceof Book) {
+
+            if(!(genre == 0)) {
+                ((Book)product).setGenre(genre);
+            }
+            if(!(review.equals("0"))) {
+                ((Book)product).setReview(review);
+            }
+
+        } else if(product instanceof Magazine) {
+
+            if(!(category == 0)) {
+                ((Magazine)product).setCategory(category);
+            }
+            if(!(issueFrecuency == 0)) {
+                ((Magazine)product).setIssueFrecuency(issueFrecuency);
+            }
+
+        } 
+
+        
+
+        return "\nProduct modified succesfully";
+    }
+
+    //---------------------------------------------------
+
+    public Product searchProductById(String id) {
+        Product product = null;
+
+        for(int i = 0; i < products.size(); i++) {
+            if(products.get(i).getId().equals(id)){
+                product = products.get(i);
+            }
+                
+        }
+
+        return product;
+    }
+
+    public String getProductsInfo() {
+        String productsInfo = "";
+
+        for(int i = 0; i < products.size(); i++) {
+            productsInfo += products.get(i).getName()+" | "+products.get(i).getId()+"\n";
+        }
+
+        return productsInfo;
+    }
+
+    public String getFullProductInfo(String id) {
+        Product product = searchProductById(id);
+
+        return product.toString();
+    }
+
+    public int getProductType(String id) {
+        int type = 0;
+        Product product = searchProductById(id);
+
+        if(product instanceof Book) {
+            type = 1;
+        } else if(product instanceof Magazine) {
+            type = 2;
+        }
+
+        return type;
+    }
 
 }

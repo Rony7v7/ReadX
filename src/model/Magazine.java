@@ -1,5 +1,3 @@
-
-
 package model;
 
 import java.util.Calendar;
@@ -9,7 +7,6 @@ public class Magazine extends Product {
     private int subscriptionsActivesAmount;
     private int issueFrecuency;
     private int category;
-    private String id;
 
     public Magazine(String name, int pagesAmount, Calendar publishDate, String url, float price, int category,int issueFrecuency) {
 
@@ -18,7 +15,7 @@ public class Magazine extends Product {
         this.category = category;
         this.subscriptionsActivesAmount = 0;
         this.issueFrecuency = issueFrecuency;
-        this.id = generateId();
+        super.id = generateId();
     }
     
     /**
@@ -89,6 +86,17 @@ public class Magazine extends Product {
   
           }
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return  "∘ Name:               " + name +
+                "\n∘ Amount of pages:    " + pagesAmount +
+                "\n∘ Publish date:       " + publishDate.get(Calendar.YEAR)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.DAY_OF_MONTH)+
+                "\n∘ URL:                " + url+
+                "\n∘ Subscription price: " + price+
+                "\n∘ Category:           " + category+
+                "\n∘ Issue frecuency:    " + issueFrecuency;
     }
 
 }

@@ -2,14 +2,15 @@ package model;
 
 import java.util.Calendar;
 
-public abstract class Product implements IdGenerator {
+public abstract class Product {
 
-    private String name;
-    private int pagesAmount;
-    private Calendar publishDate;
-    private String url;
-    private float price;
-    int pagesReadAmount;
+    protected String name;
+    protected int pagesAmount;
+    protected Calendar publishDate;
+    protected String url;
+    protected float price;
+    protected int pagesReadAmount;
+    protected String id;
 
     public Product(String name, int pagesAmount, Calendar publishDate, String url, float price) {
         this.name = name;
@@ -104,5 +105,22 @@ public abstract class Product implements IdGenerator {
         this.url = url;
     }
 
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //---------------------------------
+
+    public abstract String generateId();
 
 }

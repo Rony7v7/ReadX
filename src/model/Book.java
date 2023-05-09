@@ -7,7 +7,6 @@ public class Book extends Product {
     private int genre;
     private String review;
     private int copiesSoldAmount;
-    private String id;
 
     public Book(String name, int pagesAmount, Calendar publishDate, String url, float price,int genre, String review) {
 
@@ -16,7 +15,7 @@ public class Book extends Product {
         this.genre = genre;
         this.review = review;
         this.copiesSoldAmount = 0;
-        this.id = generateId();
+        super.id = generateId();
     
     }
     
@@ -89,6 +88,17 @@ public class Book extends Product {
   
           }
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return  "∘ Name:               " + name +
+                "\n∘ Amount of pages:    " + pagesAmount +
+                "\n∘ Publish date:       " + publishDate.get(Calendar.YEAR)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.DAY_OF_MONTH)+
+                "\n∘ URL:                " + url+
+                "\n∘ Selling price:      " + price+
+                "\n∘ Genre:              " + genre+
+                "\n∘ Review:             " + review;
     }
 
 }
