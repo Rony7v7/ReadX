@@ -12,7 +12,7 @@ public class UserStandard extends User {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void addProducts(Product product) {
         
     }
 

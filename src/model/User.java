@@ -59,8 +59,8 @@ public abstract class User {
     }
     
     //-------------------------------------------------
-    
-    public abstract void addProduct(Product product);
+
+    public abstract void addProducts(Product product);
 
     public void deleteProduct(Product product){
         products.remove(product);

@@ -33,6 +33,8 @@ public class Main{
         Main view = new Main();
         int option = 0;
 
+        view.controller.initSystem();
+
         option = view.showMenu();
 
         while (option != 0) {
@@ -184,7 +186,7 @@ public class Main{
         } else if(productType == 2) {
 
             System.out.println("\nCategory");
-            System.out.println("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
+            System.out.print("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
             category = input.nextInt();
 
             System.out.println("\nIssue frecuency");
@@ -279,7 +281,7 @@ public class Main{
                 } else if(nProductType == 2) {
 
                     System.out.println("\nCategory");
-                    System.out.println("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
+                    System.out.print("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
                     nCategory = input.nextInt();
 
                     System.out.println("\nIssue frecuency");

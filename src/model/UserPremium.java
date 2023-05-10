@@ -13,7 +13,7 @@ public class UserPremium extends User {
     }
 
     @Override
-    public void addProduct(Product product) {
+    public void addProducts(Product product) {
         products.add(product);
     }
 

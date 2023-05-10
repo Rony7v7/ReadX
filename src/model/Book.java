@@ -92,13 +92,13 @@ public class Book extends Product {
 
     @Override
     public String toString() {
-        return  "∘ Name:               " + name +
-                "\n∘ Amount of pages:    " + pagesAmount +
-                "\n∘ Publish date:       " + publishDate.get(Calendar.DAY_OF_MONTH)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.YEAR)+
-                "\n∘ URL:                " + url+
-                "\n∘ Selling price:      " + price+
-                "\n∘ Genre:              " + genre+
-                "\n∘ Review:             " + review;
+        return    "· Name:               " + name +
+                "\n· Amount of pages:    " + pagesAmount +
+                "\n· Publish date:       " + publishDate.get(Calendar.DAY_OF_MONTH)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.YEAR)+
+                "\n· URL:                " + url+
+                "\n· Selling price:      " + price+
+                "\n· Genre:              " + genre+
+                "\n· Review:             " + review;
     }
 
 }

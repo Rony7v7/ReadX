@@ -10,11 +10,15 @@ public class Bill {
     private Calendar initDate;
     private Double totalAmount;
 
-    public Bill(User owner, ArrayList<Product> products, Calendar initDate, Double totalAmount) {
+    public Bill(User owner, ArrayList<Product> products) {
         this.owner = owner;
         this.products = products;
-        this.initDate = initDate;
-        this.totalAmount = totalAmount;
+        this.initDate = Calendar.getInstance();
+
+        for(int i = 0; i< products.size(); i++){
+            this.totalAmount += products.get(i).getPrice();
+        } 
+        
     }
 
     @Override

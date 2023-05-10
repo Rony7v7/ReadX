@@ -90,13 +90,13 @@ public class Magazine extends Product {
 
     @Override
     public String toString() {
-        return  "∘ Name:               " + name +
-                "\n∘ Amount of pages:    " + pagesAmount +
-                "\n∘ Publish date:       " + publishDate.get(Calendar.YEAR)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.DAY_OF_MONTH)+
-                "\n∘ URL:                " + url+
-                "\n∘ Subscription price: " + price+
-                "\n∘ Category:           " + category+
-                "\n∘ Issue frecuency:    " + issueFrecuency;
+        return    "· Name:               " + name +
+                "\n· Amount of pages:    " + pagesAmount +
+                "\n· Publish date:       " + publishDate.get(Calendar.YEAR)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.DAY_OF_MONTH)+
+                "\n· URL:                " + url+
+                "\n· Subscription price: " + price+
+                "\n· Category:           " + category+
+                "\n· Issue frecuency:    " + issueFrecuency;
     }
 
 }

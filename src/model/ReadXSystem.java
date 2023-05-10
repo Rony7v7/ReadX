@@ -67,7 +67,17 @@ public class ReadXSystem {
         return msg;
     }
 
-    //modify book
+    public void initSystem() {
+
+        for(int i = 0; i < 10; i++) {
+            registerUser("User"+i, "id"+i, (i%2 == 0)? 2 : 1);
+            
+            registerProduct("Book"+i, (i*10), "01/01/2000", "www.urlB"+i, (i*10), (i > 3)? (Integer)(i/3):i, "review"+i);
+            registerProduct("Magazine"+i, (i*10), "01/01/2000", "www.urlM"+i, (i*10), (i > 3)? (Integer)(i/3):i, (i > 4)? (Integer)(i/4):i);
+        }
+
+    }
+
     public String modifyProduct(String id,String name, int pagesAmount, String publishDateString, String url,  float price, int genre, String review, int category,int issueFrecuency) {
 
         Product product = searchProductById(id);
@@ -137,13 +147,13 @@ public class ReadXSystem {
     }
 
     // public String purchaseProduct(ArrayList<String> productsIds, String userId) {
-    //     String msg = "\nUser id or product id not found.";
+    //     String msg = "\nUser id or not found.";
 
-    //     Bill bill;
-    //     Product product;
-        
     //     User user = searchUserById(userId);
 
+    //     if(user != null) {
+    //         msg = user.addProduct(productsIds);
+    //     }
 
     //     return msg;
     // }
@@ -181,7 +191,7 @@ public class ReadXSystem {
         String productsInfo = "";
 
         for(int i = 0; i < products.size(); i++) {
-            productsInfo += products.get(i).getName()+" | "+products.get(i).getId()+"\n";
+            productsInfo += "> "+products.get(i).getName()+" | "+products.get(i).getId()+"\n";
         }
 
         return productsInfo;
