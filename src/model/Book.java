@@ -94,7 +94,7 @@ public class Book extends Product {
     public String toString() {
         return  "∘ Name:               " + name +
                 "\n∘ Amount of pages:    " + pagesAmount +
-                "\n∘ Publish date:       " + publishDate.get(Calendar.YEAR)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.DAY_OF_MONTH)+
+                "\n∘ Publish date:       " + publishDate.get(Calendar.DAY_OF_MONTH)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.YEAR)+
                 "\n∘ URL:                " + url+
                 "\n∘ Selling price:      " + price+
                 "\n∘ Genre:              " + genre+

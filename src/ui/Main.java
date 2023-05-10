@@ -8,6 +8,10 @@
  * 
  * Como funcionan las referencias
  * 
+ * Asinar una matriz completa de 5*nProductos a cada user, y luego se imprime acotada
+ * 
+ * Crear pre tests
+ * 
 */
 
 package ui;
@@ -83,6 +87,10 @@ public class Main{
 
             case 3:
                 modifyProduct();
+                break;
+
+            case 4:
+                deleteProduct();
                 break;
                 
             default: 
@@ -288,6 +296,60 @@ public class Main{
         System.out.println(msg);
     } 
 
+    public void deleteProduct() {
+        String productsInfo = controller.getProductsInfo();
+        String msg = "There are no products to delete.";
+
+        System.out.println("-------- DELETE PRODUCT --------\n");
+        System.out.println(productsInfo);
+
+        if(!(productsInfo.isBlank())) {
+            System.out.print("Type product id: ");
+            String id = input.nextLine();
+
+            msg =controller.deleteProduct(id);
+        } 
+
+        System.out.println(msg);
+    }
+
+    // public void purchaseProduct() {
+    //     String productsInfo = controller.getProductsInfo();
+    //     String usersInfo = controller.getUsersInfo();
+
+    //     String productId;
+    //     String userId;
+
+    //     String msg = "\nThere are no products to purchase or there are not users to purchase products.";
+
+    //     System.out.println("-------- PURCHASE PRODUCT --------\n");
+
+    //     if(!(usersInfo.isBlank()) && !(productsInfo.isBlank())) {
+            
+    //         System.out.println(usersInfo);
+    //         System.out.print("Type user id: ");
+    //         userId = input.nextLine();
+
+    //         do {
+    //             System.out.print("Type product id (-1 to end buy): ");
+    //             productId = input.nextLine();
+
+    //             if(!(productId.equals("-1"))) {
+    //                 msg += controller.purchaseProduct(userId, productId);
+    //             }
+
+    //         }while(!(productId.equals("-1")));
+
+            
+    
+
+    //         msg = controller.purchaseProduct(userId, productId);
+
+    //     }
+
+    //     System.out.println(msg);
+
+    // }
 
     //---------------------------------------------------
 

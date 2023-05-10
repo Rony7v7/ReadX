@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public abstract class User {
@@ -7,7 +8,7 @@ public abstract class User {
     private String id;
     private String name;
     private Calendar linkingDate;
-    
+    protected ArrayList<Product> products;
     
     public User(String name, String id, Calendar linkingDate){
         this.id = id;
@@ -56,7 +57,19 @@ public abstract class User {
     public void setLinkingDate(Calendar linkingDate) {
         this.linkingDate = linkingDate;
     }
-
     
+    //-------------------------------------------------
+    
+    public abstract void addProduct(Product product);
+
+    public void deleteProduct(Product product){
+        products.remove(product);
+    }
+
+
+    @Override
+    public String toString() {
+        return "∙ "+name+ " | "+id;
+    }
 
 }

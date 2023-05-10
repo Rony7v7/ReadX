@@ -113,17 +113,48 @@ public class ReadXSystem {
 
         } 
 
-        
-
         return "\nProduct modified succesfully";
     }
+
+    public String deleteProduct(String id) {
+        
+        Product product = searchProductById(id);
+
+        String msg = "\nId not found";
+
+        if(product != null) {
+            products.remove(product);
+
+            for(int i = 0; i < users.size(); i++) {
+                users.get(i).deleteProduct(product);
+            } 
+
+            msg = "\nProduct deleted succesfully";
+
+        }
+
+        return msg;
+    }
+
+    // public String purchaseProduct(ArrayList<String> productsIds, String userId) {
+    //     String msg = "\nUser id or product id not found.";
+
+    //     Bill bill;
+    //     Product product;
+        
+    //     User user = searchUserById(userId);
+
+
+    //     return msg;
+    // }
 
     //---------------------------------------------------
 
     public Product searchProductById(String id) {
         Product product = null;
+        boolean isFound =  false;
 
-        for(int i = 0; i < products.size(); i++) {
+        for(int i = 0; i < products.size() && !isFound; i++) {
             if(products.get(i).getId().equals(id)){
                 product = products.get(i);
             }
@@ -131,6 +162,19 @@ public class ReadXSystem {
         }
 
         return product;
+    }
+
+    public User searchUserById(String id) {
+        User user = null;
+        Boolean isFound = false;
+
+        for(int i = 0; i < users.size() && !isFound; i++) {
+            if(users.get(i).getId().equals(id)){
+                user = users.get(i);
+            }
+        }
+
+        return user;
     }
 
     public String getProductsInfo() {
@@ -160,6 +204,16 @@ public class ReadXSystem {
         }
 
         return type;
+    }
+
+    public String getUsersInfo() {
+        String usersInfo = ""; 
+
+        for(int i = 0; i < users.size(); i++) {
+            usersInfo += users.get(i).toString()+"\n";
+        }
+
+        return usersInfo;
     }
 
 }

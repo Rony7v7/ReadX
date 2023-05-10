@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class UserPremium extends User {
-    
-    private ArrayList<Product> products;
 
     public UserPremium(String name, String id, Calendar linkingDate) {
         super(name, id,linkingDate);
@@ -13,4 +11,10 @@ public class UserPremium extends User {
         this.products = new ArrayList<Product>();
 
     }
+
+    @Override
+    public void addProduct(Product product) {
+        products.add(product);
+    }
+
 }
