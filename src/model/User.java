@@ -11,6 +11,8 @@ public abstract class User {
 
     protected ArrayList<Product> products;
     protected ArrayList<Product> cart;
+
+    private ArrayList<Bill> bills;
     
     public User(String name, String id, Calendar linkingDate){
         this.id = id;
@@ -19,6 +21,8 @@ public abstract class User {
 
         products = new ArrayList<Product>();
         cart = new ArrayList<Product>();
+
+        bills = new ArrayList<Bill>();
 
     }
 
@@ -66,7 +70,7 @@ public abstract class User {
     
     //-------------------------------------------------
 
-    public abstract String addProducts();
+    public abstract void addProducts();
 
     public void deleteProduct(Product product){
         products.remove(product);
@@ -94,7 +98,7 @@ public abstract class User {
 
         for(int i = 0; i < cart.size() && !intersect ; i++) {
             product = cart.get(i);
-            
+
             if(products.contains(product)) {
                 intersect = true;
             }
@@ -103,8 +107,11 @@ public abstract class User {
         return intersect;
     }
 
-    //public String generateBill() {
-
-    //}
+    public String generateBill() {
+        Bill bill = new Bill(cart);
+        bills.add(bill);
+        
+        return bill.toString();
+    }
 
 }

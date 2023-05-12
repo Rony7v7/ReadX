@@ -166,8 +166,15 @@ public class ReadXSystem {
 
         User user = searchUserById(userId);
 
-        if(!user.productsIntersectCart()) {
-            msg = user.addProducts();
+        if(user.cart.isEmpty()) {
+
+            msg = "\nThere are not products to purchase";
+
+        }else if(!user.productsIntersectCart()) {
+
+            msg = user.generateBill();
+            user.addProducts();
+            
         }
         
 

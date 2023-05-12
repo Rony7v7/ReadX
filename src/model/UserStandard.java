@@ -12,8 +12,7 @@ public class UserStandard extends User {
     }
 
     @Override
-    public String addProducts() {
-        String msg = "\nInserta factura ";
+    public void addProducts() {
 
         int booksAmount = 0;
         int magazinesAmount = 0;
@@ -44,7 +43,6 @@ public class UserStandard extends User {
 
         cart.clear();
 
-        return msg;
     }
 
 }

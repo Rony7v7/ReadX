@@ -11,6 +11,8 @@
  * 
  * Crear metodo para validar cada tipo de entrada universal
  * 
+ * Actualizar la cantidad de subs activas o compras totales y verificar que todo funcione
+ * 
 */
 
 package ui;
@@ -325,7 +327,7 @@ public class Main{
         String productId;
         String userId;
 
-        String msg = "\nThere are no products to purchase or there are not users to purchase products.";
+        String msg = "There are no products to purchase or there are not users to purchase products.";
 
         int continueBuyOption;
 

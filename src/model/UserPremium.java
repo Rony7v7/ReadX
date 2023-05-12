@@ -9,15 +9,13 @@ public class UserPremium extends User {
     }
 
     @Override
-    public String addProducts() {
-        String msg = "\n*Inserta factura*";
+    public void addProducts() {
 
         products.addAll(cart);
         //Generate bill
 
         cart.clear();
 
-        return msg;
     }
 
 }
