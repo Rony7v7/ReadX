@@ -146,17 +146,33 @@ public class ReadXSystem {
         return msg;
     }
 
-    // public String purchaseProduct(ArrayList<String> productsIds, String userId) {
-    //     String msg = "\nUser id or not found.";
+    public String addProductToCart(String productId, String userId) {
+        
+        String msg = "\nId not found.";
 
-    //     User user = searchUserById(userId);
+        Product product = searchProductById(productId);
+        User user = searchUserById(userId);
 
-    //     if(user != null) {
-    //         msg = user.addProduct(productsIds);
-    //     }
+        if(product != null) {
+            msg = user.addProductToCart(product);
+        }
+        
+        return msg;
+    }
 
-    //     return msg;
-    // }
+    public String purchaseCart(String userId) {
+       
+        String msg = "\nYou already own one or more of these products.";
+
+        User user = searchUserById(userId);
+
+        if(!user.productsIntersectCart()) {
+            msg = user.addProducts();
+        }
+        
+
+        return msg;
+    }
 
     //---------------------------------------------------
 

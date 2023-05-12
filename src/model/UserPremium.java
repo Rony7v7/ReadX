@@ -1,20 +1,23 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 
 public class UserPremium extends User {
 
     public UserPremium(String name, String id, Calendar linkingDate) {
         super(name, id,linkingDate);
-
-        this.products = new ArrayList<Product>();
-
     }
 
     @Override
-    public void addProducts(Product product) {
-        products.add(product);
+    public String addProducts() {
+        String msg = "\n*Inserta factura*";
+
+        products.addAll(cart);
+        //Generate bill
+
+        cart.clear();
+
+        return msg;
     }
 
 }

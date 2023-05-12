@@ -8,12 +8,18 @@ public abstract class User {
     private String id;
     private String name;
     private Calendar linkingDate;
+
     protected ArrayList<Product> products;
+    protected ArrayList<Product> cart;
     
     public User(String name, String id, Calendar linkingDate){
         this.id = id;
         this.name = name;
         this.linkingDate = Calendar.getInstance();
+
+        products = new ArrayList<Product>();
+        cart = new ArrayList<Product>();
+
     }
 
     /**
@@ -60,16 +66,45 @@ public abstract class User {
     
     //-------------------------------------------------
 
-    public abstract void addProducts(Product product);
+    public abstract String addProducts();
 
     public void deleteProduct(Product product){
         products.remove(product);
     }
 
-
     @Override
     public String toString() {
-        return "∙ "+name+ " | "+id;
+        return "· "+name+ " | "+id;
     }
+
+    public String addProductToCart(Product product) {
+        String msg = "\nProduct pending purchase";
+
+        if(!(cart.contains(product))) {
+            cart.add(product);
+            msg = "\nProduct added to cart";
+        }
+
+        return msg;
+    }
+
+    public boolean productsIntersectCart() {
+        boolean intersect = false;
+        Product product;
+
+        for(int i = 0; i < cart.size() && !intersect ; i++) {
+            product = cart.get(i);
+            
+            if(products.contains(product)) {
+                intersect = true;
+            }
+        }
+
+        return intersect;
+    }
+
+    //public String generateBill() {
+
+    //}
 
 }

@@ -3,14 +3,13 @@
  * 
  * Usar ennumeraciones
  * 
- * Al borrar productos se elimina de cada user?
- * Cómo buscar productos?
- * 
- * Como funcionan las referencias
- * 
  * Asinar una matriz completa de 5*nProductos a cada user, y luego se imprime acotada
  * 
- * Crear pre tests
+ * Cancelar suscripciones a revistas
+ * 
+ * ?En cada clase hija de usuario hay que volver a declarar su arraylist, o que se hace no entiendo
+ * 
+ * Crear metodo para validar cada tipo de entrada universal
  * 
 */
 
@@ -93,6 +92,10 @@ public class Main{
 
             case 4:
                 deleteProduct();
+                break;
+
+            case 5:
+                purchaseProduct();
                 break;
                 
             default: 
@@ -315,43 +318,52 @@ public class Main{
         System.out.println(msg);
     }
 
-    // public void purchaseProduct() {
-    //     String productsInfo = controller.getProductsInfo();
-    //     String usersInfo = controller.getUsersInfo();
+    public void purchaseProduct() {
+        String productsInfo = controller.getProductsInfo();
+        String usersInfo = controller.getUsersInfo();
 
-    //     String productId;
-    //     String userId;
+        String productId;
+        String userId;
 
-    //     String msg = "\nThere are no products to purchase or there are not users to purchase products.";
+        String msg = "\nThere are no products to purchase or there are not users to purchase products.";
 
-    //     System.out.println("-------- PURCHASE PRODUCT --------\n");
+        int continueBuyOption;
 
-    //     if(!(usersInfo.isBlank()) && !(productsInfo.isBlank())) {
+        System.out.println("-------- PURCHASE PRODUCT --------\n");
+
+        if(!(usersInfo.isBlank()) && !(productsInfo.isBlank())) {
             
-    //         System.out.println(usersInfo);
-    //         System.out.print("Type user id: ");
-    //         userId = input.nextLine();
+            System.out.println(usersInfo);
+            System.out.print("Type user id: ");
 
-    //         do {
-    //             System.out.print("Type product id (-1 to end buy): ");
-    //             productId = input.nextLine();
+            userId = input.nextLine();
 
-    //             if(!(productId.equals("-1"))) {
-    //                 msg += controller.purchaseProduct(userId, productId);
-    //             }
+            msg = "\nUser not found.";
 
-    //         }while(!(productId.equals("-1")));
+            if(controller.searchUserById(userId) != null) {
+                do{
+                    System.out.println("\n"+productsInfo);
+                    System.out.print("\nType product id: ");
+                    productId = input.nextLine();
 
-            
-    
+                    msg = controller.addProductToCart(productId, userId);
+                    System.out.println(msg);
 
-    //         msg = controller.purchaseProduct(userId, productId);
+                    System.out.print("\nContinue buying?\n1. Yes\n2. No\n>> ");
+                    continueBuyOption = input.nextInt();
+                    input.nextLine();
 
-    //     }
+                }while(continueBuyOption == 1);
 
-    //     System.out.println(msg);
+                msg = controller.purchaseCart(userId);
 
-    // }
+            }
+
+        }
+
+        System.out.println(msg);
+
+    }
 
     //---------------------------------------------------
 
