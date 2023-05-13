@@ -76,6 +76,9 @@ public class ReadXSystem {
             registerProduct("Magazine"+i, (i*10), "01/01/2000", "www.urlM"+i, (i*10), (i > 3)? (Integer)(i/3):i, (i > 4)? (Integer)(i/4):i);
         }
 
+        registerUser("UserStandard", "1", 1);
+        registerUser("UserPremium", "2", 2);
+
     }
 
     public String modifyProduct(String id,String name, int pagesAmount, String publishDateString, String url,  float price, int genre, String review, int category,int issueFrecuency) {
@@ -172,9 +175,8 @@ public class ReadXSystem {
 
         }else if(!user.productsIntersectCart()) {
 
-            msg = user.generateBill();
-            user.addProducts();
-            
+            msg = user.addProducts();
+
         }
         
 

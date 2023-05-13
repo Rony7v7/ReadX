@@ -9,12 +9,14 @@ public class UserPremium extends User {
     }
 
     @Override
-    public void addProducts() {
+    public String addProducts() {
+
+        String bill = generateBill();
 
         products.addAll(cart);
-        //Generate bill
-
         cart.clear();
+
+        return bill;
 
     }
 

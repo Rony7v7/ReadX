@@ -70,7 +70,7 @@ public abstract class User {
     
     //-------------------------------------------------
 
-    public abstract void addProducts();
+    public abstract String addProducts();
 
     public void deleteProduct(Product product){
         products.remove(product);
