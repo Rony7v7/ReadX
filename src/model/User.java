@@ -114,4 +114,14 @@ public abstract class User {
         return bill.toString();
     }
 
+    public void updateProductSoldInfo() {
+        for(Product product : cart) {
+            if(product instanceof Book) {
+                ((Book)product).updateCopiesSoldAmount();
+            } else if( product instanceof Magazine){
+            ((Magazine)product).updateSubscriptionsActivesAmount();
+            }
+        }
+    }
+
 }

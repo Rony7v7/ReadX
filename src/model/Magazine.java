@@ -33,6 +33,13 @@ public class Magazine extends Product {
     }
 
     /**
+     * sum 1 to subscriptionsActivesAmount
+     */
+    public void updateSubscriptionsActivesAmount() {
+        subscriptionsActivesAmount++;
+    }
+
+    /**
      * @return the category
      */
     public int getCategory() {

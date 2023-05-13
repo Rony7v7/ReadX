@@ -7,7 +7,7 @@
  * 
  * Cancelar suscripciones a revistas
  * 
- * ?En cada clase hija de usuario hay que volver a declarar su arraylist, o que se hace no entiendo
+ * INTERFAZ LIMITED, NECESARIA? O SIMPLEMENTE SOBREESCRIBO EL METODO VrfyPrchsCpcty EN PREMIUN QUE RETURN = TRUE
  * 
  * Crear metodo para validar cada tipo de entrada universal
  * 

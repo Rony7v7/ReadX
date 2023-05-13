@@ -63,6 +63,13 @@ public class Book extends Product {
     }
 
     /**
+     * Sum 1 to copies
+     */
+    public void updateCopiesSoldAmount(){
+        copiesSoldAmount++;
+    }
+
+    /**
      * @return the id
      */
     public String getId() {
