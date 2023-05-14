@@ -99,7 +99,7 @@ public class Book extends Product {
 
     @Override
     public String toString() {
-        return    "· Name:               " + name +
+        return    "· Name:               " + super.getName() +
                 "\n· Amount of pages:    " + pagesAmount +
                 "\n· Publish date:       " + publishDate.get(Calendar.DAY_OF_MONTH)+"/"+publishDate.get(Calendar.MONTH)+"/"+publishDate.get(Calendar.YEAR)+
                 "\n· URL:                " + url+

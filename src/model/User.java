@@ -13,6 +13,8 @@ public abstract class User {
     protected ArrayList<Product> cart;
 
     private ArrayList<Bill> bills;
+
+    private ArrayList<ReadingSession> readingSessions;
     
     public User(String name, String id, Calendar linkingDate){
         this.id = id;
@@ -23,6 +25,8 @@ public abstract class User {
         cart = new ArrayList<Product>();
 
         bills = new ArrayList<Bill>();
+
+        readingSessions = new ArrayList<ReadingSession>();
 
     }
 
@@ -122,6 +126,47 @@ public abstract class User {
             ((Magazine)product).updateSubscriptionsActivesAmount();
             }
         }
+    }
+
+    public String initReadingSession(Product product, char option) {
+
+        ReadingSession readingSession = searchReadingSessionByProduct(product);
+
+        if(readingSession == null) {
+            readingSession = new ReadingSession(product);
+            readingSessions.add(readingSession);
+        }
+
+        switch (option) {
+            case 'S':
+                readingSession.nextPage();
+                break;
+        
+            case 'A':
+                readingSession.previousPage();
+                break;
+            
+            default:
+                break;
+        }
+        
+        return readingSession.toString();
+    }
+
+    public ReadingSession searchReadingSessionByProduct(Product product) {
+        boolean isFound = false;
+        ReadingSession readingSession = null;
+
+        for (int  i = 0; i < readingSessions.size() && !isFound; i++) {
+            if(readingSessions.get(i).getProduct() == product) {
+                readingSession = readingSessions.get(i);
+                isFound = true;
+            }
+        }
+        
+        return readingSession;
+
+        
     }
 
 }

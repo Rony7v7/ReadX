@@ -11,8 +11,6 @@
  * 
  * Crear metodo para validar cada tipo de entrada universal
  * 
- * Actualizar la cantidad de subs activas o compras totales y verificar que todo funcione
- * 
 */
 
 package ui;
@@ -55,7 +53,8 @@ public class Main{
                          " 3.\u001B[0m Modify product \u001B[38;5;78m\n"+
                          " 4.\u001B[0m Delete Product \u001B[38;5;78m\n"+
                          " 5.\u001B[0m Purchase product \u001B[38;5;78m\n"+
-                         " 6.\u001B[0m Generate reports \u001B[38;5;78m\n\n"+
+                         " 6.\u001B[0m Cancel subscription to  a magazine \u001B[38;5;78m\n"+
+                         " 7.\u001B[0m Generate reports \u001B[38;5;78m\n\n"+
                          " 0.\u001B[0m Exit             \u001B[38;5;78m\n\n"+
                          " >> \u001B[0m ");
 
@@ -98,6 +97,13 @@ public class Main{
 
             case 5:
                 purchaseProduct();
+                break;
+
+            case 6:
+                intiReadingSession();
+                break;
+
+            case 7:
                 break;
                 
             default: 
@@ -367,6 +373,37 @@ public class Main{
 
     }
 
+    public void intiReadingSession() {
+        String productsInfo = controller.getProductsInfo();
+        String usersInfo = controller.getUsersInfo();
+
+        String productId;
+        String userId;
+
+        char opt = ' ';
+
+        String msg = "There are no products to start reading.";
+
+        System.out.println("-------- START READING SESSION --------\n");
+
+        System.out.println("\n"+productsInfo);
+        productId =input.nextLine();
+
+        System.out.println("\n"+usersInfo);
+        userId =input.nextLine();
+
+        do{
+            msg = controller.initReadingSession(userId, productId, opt);
+            System.out.println(msg);
+
+            opt = input.next().charAt(0);
+            input.nextLine();
+
+        } while(opt == 'A' || opt == 'S');
+
+    } 
+
+    
     //---------------------------------------------------
 
 

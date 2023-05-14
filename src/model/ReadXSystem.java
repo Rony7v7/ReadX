@@ -183,6 +183,21 @@ public class ReadXSystem {
         return msg;
     }
 
+    public String initReadingSession(String userId, String productId, char option) {
+        String msg = "\nId not found.";
+
+        Product product = searchProductById(productId);
+        User user = searchUserById(userId);
+
+        if(product != null) {
+            msg = user.initReadingSession(product, option);
+        }
+
+        return msg;
+    } 
+
+    
+
     //---------------------------------------------------
 
     public Product searchProductById(String id) {
