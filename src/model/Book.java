@@ -8,7 +8,7 @@ public class Book extends Product {
     private String review;
     private int copiesSoldAmount;
 
-    public Book(String name, int pagesAmount, Calendar publishDate, String url, float price,int genre, String review) {
+    public Book(String name, int pagesAmount, Calendar publishDate, String url, double price,int genre, String review) {
 
         super(name, pagesAmount, publishDate, url, price);
 

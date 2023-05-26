@@ -8,7 +8,7 @@ public class Magazine extends Product {
     private int issueFrecuency;
     private int category;
 
-    public Magazine(String name, int pagesAmount, Calendar publishDate, String url, float price, int category,int issueFrecuency) {
+    public Magazine(String name, int pagesAmount, Calendar publishDate, String url, double price, int category,int issueFrecuency) {
 
         super(name, pagesAmount, publishDate, url, price);
         

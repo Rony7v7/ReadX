@@ -8,7 +8,7 @@ public class ReadingSession {
     private int currentPage;
     private boolean nextPageIsNew;
 
-    public ReadingSession(Product product) {
+    public ReadingSession(Product product) { //Esto cambia el diagrama de clases?
         this.productName = product.getName();
         this.totalPages = product.getPagesAmount();
 

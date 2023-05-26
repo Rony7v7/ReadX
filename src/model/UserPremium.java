@@ -14,6 +14,9 @@ public class UserPremium extends User {
         String bill = generateBill();
 
         products.addAll(cart);
+
+        library.updateProducts();
+
         cart.clear();
 
         return bill;

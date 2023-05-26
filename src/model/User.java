@@ -15,6 +15,8 @@ public abstract class User {
     private ArrayList<Bill> bills;
 
     private ArrayList<ReadingSession> readingSessions;
+
+    protected Library library;
     
     public User(String name, String id, Calendar linkingDate){
         this.id = id;
@@ -27,6 +29,8 @@ public abstract class User {
         bills = new ArrayList<Bill>();
 
         readingSessions = new ArrayList<ReadingSession>();
+
+        library = new Library(name, products);
 
     }
 
@@ -72,6 +76,38 @@ public abstract class User {
         this.linkingDate = linkingDate;
     }
     
+    /**
+     * @return the products
+     */
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
+    public String libraryToString(){
+        return library.toString();
+    }
+    
+    public String navigateLibrary(char option){
+
+        String msg = "\n\nInvalid option.";
+
+        switch(option) {
+            case 'A':
+                library.previousPage();
+                msg = "\n\nPrevious page.";
+                break;
+            case 'D':
+                library.nextPage();
+                msg = "\n\nNext page.";
+                break;
+            case 'S':
+                msg = "\n\nReturning to main menu.";
+                break;
+        }
+
+        return msg;
+    }
+
     //-------------------------------------------------
 
     public abstract String addProducts();

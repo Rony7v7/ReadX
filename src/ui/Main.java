@@ -11,6 +11,12 @@
  * 
  * Crear metodo para validar cada tipo de entrada universal
  * 
+ *  Implements Comparable              CompareTo
+ * 
+ * Se puede usar un metodo para solicitar ids 
+ * 
+ * Para los reportes hay que ordenar el array
+ * 
 */
 
 package ui;
@@ -54,7 +60,8 @@ public class Main{
                          " 4.\u001B[0m Delete Product \u001B[38;5;78m\n"+
                          " 5.\u001B[0m Purchase product \u001B[38;5;78m\n"+
                          " 6.\u001B[0m Cancel subscription to  a magazine \u001B[38;5;78m\n"+
-                         " 7.\u001B[0m Generate reports \u001B[38;5;78m\n\n"+
+                         " 7.\u001B[0m Show library \u001B[38;5;78m\n\n"+
+                         " 8.\u001B[0m Generate reports \u001B[38;5;78m\n\n"+
                          " 0.\u001B[0m Exit             \u001B[38;5;78m\n\n"+
                          " >> \u001B[0m ");
 
@@ -100,10 +107,10 @@ public class Main{
                 break;
 
             case 6:
-                intiReadingSession();
                 break;
 
             case 7:
+                showLibrary();
                 break;
                 
             default: 
@@ -373,6 +380,40 @@ public class Main{
 
     }
 
+    public void showLibrary() {
+        String userId;
+        String usersInfo = controller.getUsersInfo();
+
+        String option;
+
+        int page = 0;
+
+        String msg = "\nThere are not users to show their library.";
+
+        System.out.println("----------- LIBRARY -----------\n");
+        System.out.println(usersInfo);
+
+        if(!usersInfo.isBlank()) {
+            System.out.print("Type user id: ");
+            userId = input.nextLine();
+
+            do{
+                msg = controller.getLibrary(userId, page);
+                System.out.print(msg+"\n\n>> ");
+                option = input.nextLine();
+
+                msg = controller.manageLibraryInput(option, userId);
+                
+                System.out.println(msg);
+            
+            }while((option.charAt(0) == 'A' || option.charAt(0) == 'D')|| option.charAt(0) != 'S' );
+
+        } else {
+            System.out.println(msg);
+        }
+
+    }
+
     public void intiReadingSession() {
         String productsInfo = controller.getProductsInfo();
         String usersInfo = controller.getUsersInfo();
@@ -403,7 +444,6 @@ public class Main{
 
     } 
 
-    
     //---------------------------------------------------
 
 

@@ -8,11 +8,11 @@ public abstract class Product {
     protected int pagesAmount;
     protected Calendar publishDate;
     protected String url;
-    protected float price;
+    protected double price;
     protected int pagesReadAmount;
     protected String id;
 
-    public Product(String name, int pagesAmount, Calendar publishDate, String url, float price) {
+    public Product(String name, int pagesAmount, Calendar publishDate, String url, double price) {
         this.name = name;
         this.pagesAmount = pagesAmount;
         this.publishDate = publishDate;
@@ -66,7 +66,7 @@ public abstract class Product {
     /**
      * @return the price
      */
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 

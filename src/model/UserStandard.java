@@ -17,10 +17,12 @@ public class UserStandard extends User implements Limited {
 
         if(canPurchase) {
             products.addAll(cart);
+            library.updateProducts();
+
             bill = generateBill();
-            
-            cart.clear();
         }
+
+        cart.clear();
 
         return bill;
     }
@@ -39,7 +41,7 @@ public class UserStandard extends User implements Limited {
         int magazinesAmountUser = userProductsAmount[1];
         int magazinesAmountCart = cartProductsAmount[1];
 
-        if(booksAmountUser + booksAmountCart > 5 || magazinesAmountUser + magazinesAmountCart > 2) {
+        if((booksAmountUser + booksAmountCart > 5) || (magazinesAmountUser + magazinesAmountCart > 2)) {
             canPurchase = false;
         }
 

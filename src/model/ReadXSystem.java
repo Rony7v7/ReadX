@@ -37,7 +37,7 @@ public class ReadXSystem {
     }
 
     //Register book
-    public String registerProduct(String name, int pagesAmount, String publishDateString, String url,  float price, int genre, String review) {
+    public String registerProduct(String name, int pagesAmount, String publishDateString, String url,  double price, int genre, String review) {
 
         String msg = "\nBook registered succesfully";
 
@@ -53,7 +53,7 @@ public class ReadXSystem {
     }
 
     //register magazine
-    public String registerProduct(String name, int pagesAmount, String publishDateString, String url, float price, int category,int issueFrecuency) {
+    public String registerProduct(String name, int pagesAmount, String publishDateString, String url, double price, int category,int issueFrecuency) {
 
         String msg = "\nMagazine registered succesfully";
 
@@ -75,6 +75,19 @@ public class ReadXSystem {
             registerProduct("Book"+i, (i*10), "01/01/2000", "www.urlB"+i, (i*10), (i > 3)? (Integer)(i/3):i, "review"+i);
             registerProduct("Magazine"+i, (i*10), "01/01/2000", "www.urlM"+i, (i*10), (i > 3)? (Integer)(i/3):i, (i > 4)? (Integer)(i/4):i);
         }
+
+        // registerProduct("The Great Gatsby", 300, "01/01/2022", "https://www.example.com/book1", 19.99, 2, "Excellent book, highly recommended.");
+        // registerProduct("Cien años de soledad", 400, "15/05/2021", "https://www.example.com/book2", 15.99, 1, "A masterpiece of literature.");
+        // registerProduct("1984", 250, "10/03/2022", "https://www.example.com/book3", 12.99, 3, "A fascinating dystopia.");
+        // registerProduct("Pride and Prejudice", 350, "20/02/2022", "https://www.example.com/book4", 16.99, 4, "A classic love story.");
+        // registerProduct("La sombra del viento", 500, "05/11/2021", "https://www.example.com/book5", 14.99, 2, "Intrigue and mystery on the streets of Barcelona.");
+
+        // registerProduct("National Geographic", 100, "01/01/2022", "https://www.example.com/magazine1", 9.99, 1, 12);
+        // registerProduct("Time", 50, "01/02/2022", "https://www.example.com/magazine2", 7.99, 2, 4);
+        // registerProduct("Vogue", 120, "01/03/2022", "https://www.example.com/magazine3", 12.99, 3, 6);
+        // registerProduct("Wired", 80, "01/04/2022", "https://www.example.com/magazine4", 8.99, 4, 8);
+        // registerProduct("Scientific American", 70, "01/05/2022", "https://www.example.com/magazine5", 10.99, 5, 1);
+
 
         registerUser("UserStandard", "1", 1);
         registerUser("UserPremium", "2", 2);
@@ -166,7 +179,6 @@ public class ReadXSystem {
     public String purchaseCart(String userId) {
        
         String msg = "\nYou already own one or more of these products.";
-
         User user = searchUserById(userId);
 
         if(user.cart.isEmpty()) {
@@ -196,7 +208,42 @@ public class ReadXSystem {
         return msg;
     } 
 
+    public String getLibrary(String userId, int page) {
+        String msg = "\nId not found.";
+
+        User user = searchUserById(userId);
+
+        if(user != null) {
+            msg = user.libraryToString();
+        }
+
+        return msg;
+    }
+
+    public String manageLibraryInput(String option, String userId) {
+        String msg = "\nId not found.";
+        User user = searchUserById(userId);
+
+        if(user != null) {
+            msg = "\nInvalid option.";
+            if(option.length() > 2){
+                
+                //ID
     
+            }else if(option.length() > 1) { // contains ,
+    
+                //Coord
+    
+            }else if(option.length() == 1) {
+    
+                msg = user.navigateLibrary(option.charAt(0));
+    
+            }
+        }
+
+        return msg;
+
+    }
 
     //---------------------------------------------------
 
@@ -212,6 +259,11 @@ public class ReadXSystem {
         }
 
         return product;
+    }
+
+    public Product searchProductByCoord() {
+
+        return null;
     }
 
     public User searchUserById(String id) {
