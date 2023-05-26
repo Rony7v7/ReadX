@@ -136,12 +136,8 @@ public class Main{
         System.out.print("\nId: ");
         id = input.nextLine();
 
-        do {
-            System.out.print("\nUser plan"+"\n1.Regular"+"\n2.Premium"+"\n>> ");
-            type = input.nextInt();
-            input.nextLine();
-  
-        } while (type < 1 || type >2);
+        System.out.print("\nUser plan"+"\n1.Regular"+"\n2.Premium");
+        type = validateIntInRange(1, 2);
 
         msg = controller.registerUser(name, id, type);
 
@@ -169,9 +165,8 @@ public class Main{
 
         System.out.println("-------- REGISTER PRODUCT --------\n");
         
-        System.out.print("Type of product"+"\n1. Book"+"\n2. Magazine"+"\n>>  "); //Validar
-        productType = input.nextInt();
-        input.nextLine();
+        System.out.print("Type of product"+"\n1. Book"+"\n2. Magazine");
+        productType = validateIntInRange(1, 2);
 
         System.out.print("\nName: ");
         name = input.nextLine();
@@ -192,9 +187,8 @@ public class Main{
         if(productType == 1) {
 
             System.out.println("\nGenre");
-            System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel \n>> ");  //Validar
-            genre = input.nextInt();
-            input.nextLine();
+            System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel ");
+            genre = validateIntInRange(1, 3);
 
             System.out.print("\nReview: ");
             review = input.nextLine();
@@ -204,13 +198,12 @@ public class Main{
         } else if(productType == 2) {
 
             System.out.println("\nCategory");
-            System.out.print("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
-            category = input.nextInt();
+            System.out.print("1. Varieties \n2. Design \n3. Scientific ");
+            category = validateIntInRange(1, 3);
 
             System.out.println("\nIssue frecuency");
-            System.out.print("1. Diary \n2. Weekly \n3. Monthly \n4. Yearly \n>> "); //Validar
-            issueAmount = input.nextInt();
-            input.nextLine();
+            System.out.print("1. Diary \n2. Weekly \n3. Monthly \n4. Yearly ");
+            issueAmount = validateIntInRange(1, 4);
 
             msg = controller.registerProduct(name, pagesAmount, publishDate, url, price, category, issueAmount);
     
@@ -287,9 +280,8 @@ public class Main{
                 if(nProductType == 1) {
 
                     System.out.println("\nGenre");
-                    System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel \n>> ");  //Validar
-                    nGenre = input.nextInt();
-                    input.nextLine();
+                    System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel ");  //Validar
+                    nGenre = validateIntInRange(1, 3);
 
                     System.out.print("\nReview: ");
                     nReview = input.nextLine();
@@ -299,13 +291,12 @@ public class Main{
                 } else if(nProductType == 2) {
 
                     System.out.println("\nCategory");
-                    System.out.print("1. Varieties \n2. Design \n3. Scientific \n>> ");  //Validar
-                    nCategory = input.nextInt();
+                    System.out.println("1. Varieties \n2. Design \n3. Scientific");
+                    nCategory = validateIntInRange(1, 3);
 
                     System.out.println("\nIssue frecuency");
-                    System.out.print("1. Diary \n2. Weekly \n3. Monthly \n4. Yearly \n>> "); //Validar
-                    nIssueAmount = input.nextInt();
-                    input.nextLine();
+                    System.out.print("1. Diary \n2. Weekly \n3. Monthly \n4. Yearly ");
+                    nIssueAmount =validateIntInRange(1, 4);
 
                     msg = controller.modifyProduct(id,nName, nPagesAmount, nPublishDate, nUrl, nPrice, 0, "0", nCategory, nIssueAmount);
                 }
@@ -364,9 +355,8 @@ public class Main{
                     msg = controller.addProductToCart(productId, userId);
                     System.out.println(msg);
 
-                    System.out.print("\nContinue buying?\n1. Yes\n2. No\n>> ");
-                    continueBuyOption = input.nextInt();
-                    input.nextLine();
+                    System.out.print("\nContinue buying?\n1. Yes\n2. No ");
+                    continueBuyOption = validateIntInRange(1, 2);
 
                 }while(continueBuyOption == 1);
 
@@ -399,7 +389,7 @@ public class Main{
 
             do{
                 msg = controller.getLibrary(userId, page);
-                System.out.print(msg+"\n\n>> ");
+                System.out.print(msg+"\n ");
                 option = input.nextLine();
 
                 msg = controller.manageLibraryInput(option, userId);
@@ -443,6 +433,25 @@ public class Main{
         } while(opt == 'A' || opt == 'S');
 
     } 
+
+    public int validateIntInRange(int min, int max) {
+
+        int option = 0;
+        System.out.println("");
+
+        do{
+            System.out.print(">> ");
+            option = input.nextInt();
+            input.nextLine();
+
+            if(option < min || option > max) {
+                System.out.println("\r\t\tInvalid option.");
+            }
+
+        }while(option < min || option > max);
+
+        return option;
+    }
 
     //---------------------------------------------------
 
