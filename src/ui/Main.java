@@ -1,21 +1,16 @@
 /* 
  * DUDAS:
  * 
- * Usar ennumeraciones
- * 
- * Asinar una matriz completa de 5*nProductos a cada user, y luego se imprime acotada
  * 
  * Cancelar suscripciones a revistas
  * 
  * INTERFAZ LIMITED, NECESARIA? O SIMPLEMENTE SOBREESCRIBO EL METODO VrfyPrchsCpcty EN PREMIUN QUE RETURN = TRUE
  * 
- * Crear metodo para validar cada tipo de entrada universal
- * 
  *  Implements Comparable              CompareTo
  * 
  * Se puede usar un metodo para solicitar ids 
  * 
- * Para los reportes hay que ordenar el array
+ * Para los reportes hay que ordenar el array +||-
  * 
 */
 

@@ -5,7 +5,7 @@ import java.util.Calendar;
 public class Magazine extends Product {
 
     private int subscriptionsActivesAmount;
-    private int issueFrecuency;
+    private IssueFrecuency issueFrecuency;
     private Category category;
 
     public Magazine(String name, int pagesAmount, Calendar publishDate, String url, double price, int category,int issueFrecuency) {
@@ -25,7 +25,22 @@ public class Magazine extends Product {
         }
         
         this.subscriptionsActivesAmount = 0;
-        this.issueFrecuency = issueFrecuency;
+        
+        switch (issueFrecuency) {
+            case 1:
+                this.issueFrecuency = IssueFrecuency.DIARY;
+                break;
+            case 2:
+                this.issueFrecuency = IssueFrecuency.WEEKLY;
+                break;
+            case 3: 
+                this.issueFrecuency = IssueFrecuency.MONTHLY;
+                break;
+            case 4:
+                this.issueFrecuency = IssueFrecuency.YEARLY;
+                break;
+        }
+
         super.id = generateId();
     }
     
@@ -77,7 +92,7 @@ public class Magazine extends Product {
     /**
      * @return the issueFrecuency
      */
-    public int getIssueFrecuency() {
+    public IssueFrecuency getIssueFrecuency() {
         return issueFrecuency;
     }
 
@@ -85,7 +100,20 @@ public class Magazine extends Product {
      * @param issueFrecuency the issueFrecuency to set
      */
     public void setIssueFrecuency(int issueFrecuency) {
-        this.issueFrecuency = issueFrecuency;
+        switch (issueFrecuency) {
+            case 1:
+                this.issueFrecuency = IssueFrecuency.DIARY;
+                break;
+            case 2:
+                this.issueFrecuency = IssueFrecuency.WEEKLY;
+                break;
+            case 3: 
+                this.issueFrecuency = IssueFrecuency.MONTHLY;
+                break;
+            case 4:
+                this.issueFrecuency = IssueFrecuency.YEARLY;
+                break;
+        }
     }
 
     /**
