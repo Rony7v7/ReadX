@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 public class Book extends Product {
     
-    private int genre;
+    private Genre genre;
     private String review;
     private int copiesSoldAmount;
 
@@ -12,7 +12,18 @@ public class Book extends Product {
 
         super(name, pagesAmount, publishDate, url, price);
 
-        this.genre = genre;
+        switch(genre) {
+            case 1:
+                this.genre = Genre.SCIENCE_FICTION;
+                break;
+            case 2:
+                this.genre = Genre.FANTASY;
+                break;
+            case 3: 
+                this.genre = Genre.HISTORICAL_NOVEL;
+                break;
+        }
+        
         this.review = review;
         this.copiesSoldAmount = 0;
         super.id = generateId();
@@ -22,7 +33,7 @@ public class Book extends Product {
     /**
      * @return the genre
      */
-    public int getGenre() {
+    public Genre getGenre() {
         return genre;
     }
 
@@ -30,7 +41,17 @@ public class Book extends Product {
      * @param genre the genre to set
      */
     public void setGenre(int genre) {
-        this.genre = genre;
+        switch(genre) {
+            case 1:
+                this.genre = Genre.SCIENCE_FICTION;
+                break;
+            case 2:
+                this.genre = Genre.FANTASY;
+                break;
+            case 3: 
+                this.genre = Genre.HISTORICAL_NOVEL;
+                break;
+        }
     }
 
     /**
