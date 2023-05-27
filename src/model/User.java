@@ -94,14 +94,14 @@ public abstract class User {
         switch(option) {
             case 'A':
                 library.previousPage();
-                msg = "\n\nPrevious page.";
+                msg = "\nPrevious page.";
                 break;
             case 'D':
                 library.nextPage();
-                msg = "\n\nNext page.";
+                msg = "\nNext page.";
                 break;
             case 'S':
-                msg = "\n\nReturning to main menu.";
+                msg = "\nReturning to main menu.";
                 break;
         }
 

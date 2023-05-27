@@ -68,13 +68,22 @@ public class ReadXSystem {
     }
 
     public void initSystem() {
+        
+        registerUser("UserStandard", "1", 1);
+        registerUser("UserPremium", "2", 2);
+        registerUser("UserPremiumTestLibrary", "3", 2);
 
-        for(int i = 0; i < 10; i++) {
-            registerUser("User"+i, "id"+i, (i%2 == 0)? 2 : 1);
-            
+        for(int i = 0; i < 26; i++) {
             registerProduct("Book"+i, (i*10), "01/01/2000", "www.urlB"+i, (i*10), (i > 3)? (Integer)(i/3):i, "review"+i);
+
             registerProduct("Magazine"+i, (i*10), "01/01/2000", "www.urlM"+i, (i*10), (i > 3)? (Integer)(i/3):i, (i > 4)? (Integer)(i/4):i);
         }
+
+        for(int i = 0; i < products.size(); i++) {
+            addProductToCart(products.get(i).getId(), "3");
+        }
+        
+        purchaseCart("3");
 
         // registerProduct("The Great Gatsby", 300, "01/01/2022", "https://www.example.com/book1", 19.99, 2, "Excellent book, highly recommended.");
         // registerProduct("Cien años de soledad", 400, "15/05/2021", "https://www.example.com/book2", 15.99, 1, "A masterpiece of literature.");
@@ -89,8 +98,6 @@ public class ReadXSystem {
         // registerProduct("Scientific American", 70, "01/05/2022", "https://www.example.com/magazine5", 10.99, 5, 1);
 
 
-        registerUser("UserStandard", "1", 1);
-        registerUser("UserPremium", "2", 2);
 
     }
 
@@ -254,6 +261,7 @@ public class ReadXSystem {
         for(int i = 0; i < products.size() && !isFound; i++) {
             if(products.get(i).getId().equals(id)){
                 product = products.get(i);
+                isFound = true;
             }
                 
         }

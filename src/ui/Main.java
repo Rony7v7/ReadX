@@ -384,13 +384,15 @@ public class Main{
 
             do{
                 msg = controller.getLibrary(userId, page);
-                System.out.print(msg+"\n ");
+                System.out.print(msg+"\n>> ");
                 option = input.nextLine();
 
                 msg = controller.manageLibraryInput(option, userId);
                 
+                cleanScreen(false);
+
                 System.out.println(msg);
-            
+
             }while((option.charAt(0) == 'A' || option.charAt(0) == 'D')|| option.charAt(0) != 'S' );
 
         } else {

@@ -31,6 +31,7 @@ public class Library {
             currentPage++;
         }
 
+
     }
 
     public void previousPage() {
@@ -38,6 +39,7 @@ public class Library {
         if(currentPage > 0) {
             currentPage--;
         }
+
         
     }
 
@@ -48,7 +50,13 @@ public class Library {
      */
     public void updateProducts() {
         sortProductsByDate();
-        ROWS = (int)Math.ceil((double)(products.size())/5)*5;
+        
+        ROWS = (int) Math.ceil(products.size() / 5.0);
+
+        while(ROWS%5 != 0) { // Ajust matrix size to be multiple of 5 
+            ROWS++;
+        }
+
         arraylistToMatrix();
     }
 
@@ -67,7 +75,7 @@ public class Library {
 
         int indexArraylist = 0;
 
-        for(int i = 25*currentPage; i < ROWS; i++) {
+        for(int i = 0; i < ROWS; i++) {
             row = new String[COLUMNS];
 
             for(int j = 0; j < COLUMNS; j++) {
@@ -86,9 +94,12 @@ public class Library {
 
     public String matrixToString() {
         String matrixString = "\n    |  0  |  1  |  2  |  3  |  4  |\n";
+        int rowCounter = 0;
 
-        for(int i = 0; i < ROWS; i++){
-            matrixString += "| "+i+" | ";
+        for(int i = currentPage*5; i < 5+currentPage*5; i++){
+            matrixString += "| "+rowCounter+" | ";
+            rowCounter++;
+
             for(int j = 0; j < COLUMNS; j++){
                 matrixString += productsMatrix.get(i)[j] + " | ";
             }
@@ -100,7 +111,7 @@ public class Library {
 
     @Override
     public String toString() {
-        return "Library of " + userName+"\n"+
+        return "\nLibrary of " + userName+"\n"+
         matrixToString()+
         "\nType the coord (x,y) or the product id to init a reading session"+
         "\nType A to previous page"+
