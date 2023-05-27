@@ -7,7 +7,6 @@ public class UserStandard extends User implements Limited {
 
     public UserStandard(String name, String id, Calendar linkingDate) {
         super(name, id, linkingDate);
-
     }
 
     @Override
@@ -17,6 +16,7 @@ public class UserStandard extends User implements Limited {
 
         if(canPurchase) {
             products.addAll(cart);
+            
             library.updateProducts();
 
             bill = generateBill();

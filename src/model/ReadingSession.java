@@ -6,34 +6,39 @@ public class ReadingSession {
     private String productName;
     private int totalPages;
     private int currentPage;
-    private boolean nextPageIsNew;
+    private int maxPageRead;
 
-    public ReadingSession(Product product) { //Esto cambia el diagrama de clases?
+    public ReadingSession(Product product) {
+        this.product = product;
         this.productName = product.getName();
         this.totalPages = product.getPagesAmount();
 
-        currentPage = 1;
-        product.setPagesReadAmount(currentPage);
+        currentPage = maxPageRead = 1;
+        this.product.updatePagesReadAmount(currentPage);
 
-        this.nextPageIsNew = true;
     }
 
     public void nextPage() {
         this.currentPage++;
 
-        // if(nextPageIsNew){
-        //     product.setPagesReadAmount(product.getPagesReadAmount()+1);
-        // }
+        if (currentPage > maxPageRead) {
+            maxPageRead ++;
+            this.product.updatePagesReadAmount(1);
+        }
     }
 
     public void previousPage() {
-        currentPage = currentPage > 1? currentPage-1 : currentPage;
-        nextPageIsNew = false;
+        this.currentPage = currentPage > 1? currentPage-1 : currentPage;
     }
 
     @Override
     public String toString() {
-        return "\nReading Session in progress:\n\nReading: "+productName+"\n\nReading page "+currentPage+"/"+totalPages;
+        return  "\nReading Session in progress:\n\n"+
+                "Reading: "+productName+
+                "\n\nReading page "+currentPage+"/"+totalPages+
+                "\n\nType A to previous page"+
+                "\nType D to next page"+
+                "\nType S to back to library";
     }
 
     /**

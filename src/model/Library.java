@@ -17,7 +17,7 @@ public class Library {
     public Library(String userName, ArrayList<Product> products) {
         this.userName = userName;
         this.products = products;
-        
+
         this.productsMatrix = new ArrayList<String[]>();
 
         arraylistToMatrix();
@@ -26,14 +26,11 @@ public class Library {
     }
 
     public void nextPage() {
-
         if(currentPage < products.size()/25) {
             currentPage++;
         }
-
-
     }
-
+ 
     public void previousPage() {
         
         if(currentPage > 0) {
@@ -68,7 +65,6 @@ public class Library {
     }
 
     public void arraylistToMatrix() {
-
         productsMatrix.clear();
 
         String[] row;

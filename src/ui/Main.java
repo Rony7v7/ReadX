@@ -1,7 +1,6 @@
 /* 
  * DUDAS:
  * 
- * 
  * Cancelar suscripciones a revistas
  * 
  * INTERFAZ LIMITED, NECESARIA? O SIMPLEMENTE SOBREESCRIBO EL METODO VrfyPrchsCpcty EN PREMIUN QUE RETURN = TRUE
@@ -386,12 +385,20 @@ public class Main{
                 msg = controller.getLibrary(userId, page);
                 System.out.print(msg+"\n>> ");
                 option = input.nextLine();
-
-                msg = controller.manageLibraryInput(option, userId);
                 
                 cleanScreen(false);
+                
+                if(option.length() == 1) {
 
-                System.out.println(msg);
+                    msg = controller.navigateLibrary(option, userId);
+                    System.out.println(msg);
+
+                } else if(controller.userHasProduct(userId, option)){
+                    initReadingSession(userId, option);
+                } else {
+                    System.out.println("\nId or coordinates not found.");
+                }
+
 
             }while((option.charAt(0) == 'A' || option.charAt(0) == 'D')|| option.charAt(0) != 'S' );
 
@@ -401,33 +408,23 @@ public class Main{
 
     }
 
-    public void intiReadingSession() {
-        String productsInfo = controller.getProductsInfo();
-        String usersInfo = controller.getUsersInfo();
-
-        String productId;
-        String userId;
-
-        char opt = ' ';
-
-        String msg = "There are no products to start reading.";
-
-        System.out.println("-------- START READING SESSION --------\n");
-
-        System.out.println("\n"+productsInfo);
-        productId =input.nextLine();
-
-        System.out.println("\n"+usersInfo);
-        userId =input.nextLine();
-
+    public void initReadingSession(String userId, String productLink) {
+        char option = ' ';
+        String msg;
+        
         do{
-            msg = controller.initReadingSession(userId, productId, opt);
-            System.out.println(msg);
+            cleanScreen(false);
+            msg = controller.initReadingSession(userId, productLink, option);
 
-            opt = input.next().charAt(0);
+            System.out.print(msg+"\n>> ");
+            option = input.next().charAt(0);
             input.nextLine();
-
-        } while(opt == 'A' || opt == 'S');
+            
+            if(option != 'A' && option != 'D' && option != 'S') {
+                System.out.println("\nInvalid option.");
+            }
+  
+        } while(option == 'A' || option == 'D' || option != 'S');
 
     } 
 

@@ -83,13 +83,15 @@ public abstract class User {
         return products;
     }
 
+    
+    //-------------------------------------------------
     public String libraryToString(){
         return library.toString();
     }
     
     public String navigateLibrary(char option){
 
-        String msg = "\n\nInvalid option.";
+        String msg = "\nInvalid option.";
 
         switch(option) {
             case 'A':
@@ -108,12 +110,11 @@ public abstract class User {
         return msg;
     }
 
-    //-------------------------------------------------
-
     public abstract String addProducts();
 
     public void deleteProduct(Product product){
         products.remove(product);
+        library.updateProducts();
     }
 
     @Override
@@ -159,7 +160,7 @@ public abstract class User {
             if(product instanceof Book) {
                 ((Book)product).updateCopiesSoldAmount();
             } else if( product instanceof Magazine){
-            ((Magazine)product).updateSubscriptionsActivesAmount();
+                ((Magazine)product).updateSubscriptionsActivesAmount();
             }
         }
     }
@@ -167,26 +168,32 @@ public abstract class User {
     public String initReadingSession(Product product, char option) {
 
         ReadingSession readingSession = searchReadingSessionByProduct(product);
+        
+        String msg = null;
 
-        if(readingSession == null) {
+        if(readingSession == null && hasProduct(product)) {
             readingSession = new ReadingSession(product);
             readingSessions.add(readingSession);
+
         }
 
         switch (option) {
-            case 'S':
+            case 'D':
                 readingSession.nextPage();
+                msg = readingSession.toString();
                 break;
         
             case 'A':
                 readingSession.previousPage();
+                msg = readingSession.toString();
                 break;
-            
+                
             default:
+                msg = readingSession.toString();
                 break;
-        }
+            }
         
-        return readingSession.toString();
+        return msg;
     }
 
     public ReadingSession searchReadingSessionByProduct(Product product) {
@@ -202,7 +209,10 @@ public abstract class User {
         
         return readingSession;
 
-        
+    }
+
+    public boolean hasProduct(Product product){
+        return products.contains(product);
     }
 
 }

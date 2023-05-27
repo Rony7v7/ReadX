@@ -59,8 +59,8 @@ public abstract class Product {
     /**
      * @param pagesReadAmount the pagesReadAmount to set
      */
-    public void setPagesReadAmount(int pagesReadAmount) {
-        this.pagesReadAmount = pagesReadAmount;
+    public void updatePagesReadAmount(int newPages) {
+        this.pagesReadAmount += newPages;
     }
 
     /**
