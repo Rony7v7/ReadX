@@ -3,13 +3,13 @@
  * 
  * Cancelar suscripciones a revistas
  * 
- * INTERFAZ LIMITED, NECESARIA? O SIMPLEMENTE SOBREESCRIBO EL METODO VrfyPrchsCpcty EN PREMIUN QUE RETURN = TRUE
- * 
  *  Implements Comparable              CompareTo
  * 
  * Se puede usar un metodo para solicitar ids 
  * 
  * Para los reportes hay que ordenar el array +||-
+ * 
+ * Metodo para verificar si el usuario existe
  * 
 */
 
@@ -101,6 +101,7 @@ public class Main{
                 break;
 
             case 6:
+                cancelMagazineSubscription();
                 break;
 
             case 7:
@@ -364,6 +365,43 @@ public class Main{
 
     }
 
+    public void cancelMagazineSubscription() {
+        String usersInfo = controller.getUsersInfo();
+        String magazinesInfo;
+        
+        String magazineId;
+        String userId;
+        
+        String msg = "There are no users registered.";
+        
+        System.out.println("-------- CANCEL MAGAZINE SUBSCRIPTION --------\n");
+
+        if(!usersInfo.isBlank()) {
+            
+            System.out.println(usersInfo);
+            System.out.print("Type user id: ");
+
+            userId = input.nextLine();
+            System.out.println(" ");
+
+            msg = "\nUser not found.";
+
+            if(controller.searchUserById(userId) != null) {
+                magazinesInfo = controller.getUserMagazines(userId);
+
+                System.out.println(magazinesInfo);
+                System.out.print("Type magazine id: ");
+
+                magazineId = input.nextLine();
+
+                msg = controller.cancelMagazineSubscription(userId, magazineId);
+            }
+
+        }
+
+        System.out.println(msg);
+    }
+
     public void showLibrary() {
         String userId;
         String usersInfo = controller.getUsersInfo();
@@ -378,33 +416,40 @@ public class Main{
         System.out.println(usersInfo);
 
         if(!usersInfo.isBlank()) {
+            msg = "\nUser not found.";
+
             System.out.print("Type user id: ");
             userId = input.nextLine();
 
-            do{
-                msg = controller.getLibrary(userId, page);
-                System.out.print(msg+"\n>> ");
-                option = input.nextLine();
-                
-                cleanScreen(false);
-                
-                if(option.length() == 1) {
-
-                    msg = controller.navigateLibrary(option, userId);
-                    System.out.println(msg);
-
-                } else if(controller.userHasProduct(userId, option)){
-                    initReadingSession(userId, option);
-                } else {
-                    System.out.println("\nId or coordinates not found.");
-                }
-
-
-            }while((option.charAt(0) == 'A' || option.charAt(0) == 'D')|| option.charAt(0) != 'S' );
+            if(controller.searchUserById(userId) != null) {
+                do{
+                    msg = controller.getLibrary(userId, page);
+                    System.out.print(msg+"\n>> ");
+                    option = input.nextLine();
+                    
+                    cleanScreen(false);
+                    
+                    if(option.length() == 1) {
+    
+                        msg = controller.navigateLibrary(option, userId);
+                        System.out.println(msg);
+    
+                    } else if(controller.userHasProduct(userId, option)){
+                        initReadingSession(userId, option);
+                    } else {
+                        System.out.println("\nId or coordinates not found.");
+                    }
+    
+                }while((option.charAt(0) == 'A' || option.charAt(0) == 'D')|| option.charAt(0) != 'S' );
+            } else {
+                System.out.println(msg);
+            }
 
         } else {
             System.out.println(msg);
         }
+
+
 
     }
 

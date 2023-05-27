@@ -16,6 +16,8 @@ public class ReadXSystem {
         users = new ArrayList<User>();
         products = new ArrayList<Product>();
     }
+
+    //----------- REQUIERMENTS -----------------
     
     public String registerUser(String name, String id, int type){
 
@@ -202,6 +204,17 @@ public class ReadXSystem {
         return msg;
     }
 
+    public String cancelMagazineSubscription(String userId, String magazineId) {
+        String msg = "\nId not found.";
+        User user = searchUserById(userId);
+
+        if(user != null) {
+            msg = user.cancelMagazineSubscription(magazineId);
+        }
+
+        return msg;
+    }
+
     public String initReadingSession(String userId, String productId, char option) {
         String msg = "\nId not found.";
 
@@ -239,7 +252,7 @@ public class ReadXSystem {
 
     }
 
-    //---------------------------------------------------
+    //-------------------PRODUCTS-------------------
 
     public Product searchProductById(String id) {
         Product product = null;
@@ -261,24 +274,11 @@ public class ReadXSystem {
         return null;
     }
 
-    public User searchUserById(String id) {
-        User user = null;
-        Boolean isFound = false;
-
-        for(int i = 0; i < users.size() && !isFound; i++) {
-            if(users.get(i).getId().equals(id)){
-                user = users.get(i);
-            }
-        }
-
-        return user;
-    }
-
     public String getProductsInfo() {
         String productsInfo = "";
 
-        for(int i = 0; i < products.size(); i++) {
-            productsInfo += "> "+products.get(i).getName()+" | "+products.get(i).getId()+"\n";
+        for(Product product : products) {
+            productsInfo += "> "+product.getName()+" | "+product.getId()+"\n";
         }
 
         return productsInfo;
@@ -289,7 +289,7 @@ public class ReadXSystem {
 
         return product.toString();
     }
-
+    
     public int getProductType(String id) {
         int type = 0;
         Product product = searchProductById(id);
@@ -301,6 +301,21 @@ public class ReadXSystem {
         }
 
         return type;
+    }
+
+    //--------------------USERS---------------------
+
+    public User searchUserById(String id) {
+        User user = null;
+        Boolean isFound = false;
+
+        for(int i = 0; i < users.size() && !isFound; i++) {
+            if(users.get(i).getId().equals(id)){
+                user = users.get(i);
+            }
+        }
+
+        return user;
     }
 
     public String getUsersInfo() {
@@ -324,4 +339,16 @@ public class ReadXSystem {
         return hasProduct;
 
     }
+
+    public String getUserMagazines(String userId) {
+        String magazines = "";
+        User user = searchUserById(userId);
+
+        if(user != null) {
+            magazines = user.getMagazinesToString();
+        }
+
+        return magazines;
+    }
+
 }

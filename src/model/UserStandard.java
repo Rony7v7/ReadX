@@ -17,8 +17,6 @@ public class UserStandard extends User implements Limited {
         if(canPurchase) {
             products.addAll(cart);
             
-            library.updateProducts();
-
             bill = generateBill();
         }
 

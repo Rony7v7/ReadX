@@ -83,9 +83,24 @@ public abstract class User {
         return products;
     }
 
+    public String getMagazinesToString(){
+        String magazinesInfo = "";
+
+        for(Product product : products) {
+            if(product instanceof Magazine) {
+                magazinesInfo += "> "+product.getName()+" | "+product.getId()+"\n";
+            }
+        }
+
+        return magazinesInfo;
+    }
     
     //-------------------------------------------------
     public String libraryToString(){
+        if(!products.isEmpty()) {
+            library.updateProducts();
+        }
+        
         return library.toString();
     }
     
@@ -142,6 +157,7 @@ public abstract class User {
 
             if(products.contains(product)) {
                 intersect = true;
+                cart.clear();
             }
         }
 
@@ -163,6 +179,18 @@ public abstract class User {
                 ((Magazine)product).updateSubscriptionsActivesAmount();
             }
         }
+    }
+
+    public String cancelMagazineSubscription(String id) {
+        String msg = "\nId not found.";
+        Product magazine = searchMagazineById(id);
+
+        if(magazine != null) {
+            products.remove(magazine);
+            msg = "\nSubscription canceled :(.";
+        }
+        
+        return msg;
     }
 
     public String initReadingSession(Product product, char option) {
@@ -213,6 +241,18 @@ public abstract class User {
 
     public boolean hasProduct(Product product){
         return products.contains(product);
+    }
+
+    public Product searchMagazineById(String id) {
+        Product magazine = null;
+
+        for(Product product : products) {
+            if(product instanceof Magazine && product.getId().equals(id)) {
+                magazine = product;
+            }
+        }
+
+        return magazine;
     }
 
 }
