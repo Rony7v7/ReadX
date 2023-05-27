@@ -252,7 +252,46 @@ public class ReadXSystem {
 
     }
 
-    //-------------------PRODUCTS-------------------
+    public String generateReports(int reportType){
+        String msg = "\nInvalid option";
+
+        switch(reportType) {
+            case 1:
+                msg = getReportOfTotalPagesReadAmount();
+                break;
+            case 2:
+                break;
+                
+            case 3:
+                break;
+        }
+
+        return msg;
+    }
+
+    public String getReportOfTotalPagesReadAmount(){
+        String report = null;
+        
+        int totalPagesReadAmountInBook = 0;
+        int totalPagesReadAmountInMagazine = 0;
+
+        int[] totalPagesReadAmountPerProductType;;
+
+        for(User user : users) {
+            totalPagesReadAmountPerProductType = user.getTotalPagesReadAmountPerProductType();
+
+            totalPagesReadAmountInBook += totalPagesReadAmountPerProductType[0];
+            totalPagesReadAmountInMagazine += totalPagesReadAmountPerProductType[1];
+        }
+        
+        report =    "\nTotal accumulated number of pages read by product type\n"+
+                    "\nTotal pages read amount in books: "+totalPagesReadAmountInBook+
+                    "\nTotal pages read amount in magazines: "+totalPagesReadAmountInMagazine;
+
+        return report;
+    }
+
+    //-------------------Others-------------------
 
     public Product searchProductById(String id) {
         Product product = null;
@@ -302,8 +341,6 @@ public class ReadXSystem {
 
         return type;
     }
-
-    //--------------------USERS---------------------
 
     public User searchUserById(String id) {
         User user = null;

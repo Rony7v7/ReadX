@@ -11,6 +11,10 @@
  * 
  * Metodo para verificar si el usuario existe
  * 
+ * Anuncios
+ * 
+ * Buscar por coordenadas
+ * 
 */
 
 package ui;
@@ -54,7 +58,7 @@ public class Main{
                          " 4.\u001B[0m Delete Product \u001B[38;5;78m\n"+
                          " 5.\u001B[0m Purchase product \u001B[38;5;78m\n"+
                          " 6.\u001B[0m Cancel subscription to  a magazine \u001B[38;5;78m\n"+
-                         " 7.\u001B[0m Show library \u001B[38;5;78m\n\n"+
+                         " 7.\u001B[0m Show library \u001B[38;5;78m\n"+
                          " 8.\u001B[0m Generate reports \u001B[38;5;78m\n\n"+
                          " 0.\u001B[0m Exit             \u001B[38;5;78m\n\n"+
                          " >> \u001B[0m ");
@@ -106,6 +110,10 @@ public class Main{
 
             case 7:
                 showLibrary();
+                break;
+
+            case 8:
+                generateReports();
                 break;
                 
             default: 
@@ -473,6 +481,26 @@ public class Main{
 
     } 
 
+    public void generateReports(){
+        String msg = " ";
+        int option;
+
+        System.out.println("-------- GENERATE REPORTS --------\n");
+        System.out.println( "Choose the report you want to generate: \n"+
+                            "\n1. Total accumulated number of pages read by product type"+
+                            "\n2. Most read genres and categories"+
+                            "\n3. Top 5 most-read books and Top 5 most-read magazines"+
+                            "\n4. Sales report by genre"+
+                            "\n5. Subscriptions report by category"
+                          );
+        option = validateIntInRange(1, 5);
+
+        msg = controller.generateReports(option);
+
+        System.out.println(msg);
+    }
+    //---------------------------------------------------
+    
     public int validateIntInRange(int min, int max) {
 
         int option = 0;
@@ -491,8 +519,5 @@ public class Main{
 
         return option;
     }
-
-    //---------------------------------------------------
-
-
+    
 }

@@ -255,4 +255,23 @@ public abstract class User {
         return magazine;
     }
 
+    public int[] getTotalPagesReadAmountPerProductType() {
+        int[] pagesReadAmount = new int[2];
+        int booksPagesReadAmount = 0;
+        int magazinesPagesReadAmount = 0;
+        
+        for(Product product : products) {
+            if(product instanceof Book) {
+                booksPagesReadAmount += ((Book)product).getPagesReadAmount();
+            } else if(product instanceof Magazine) {
+                magazinesPagesReadAmount += ((Magazine)product).getPagesReadAmount();
+            }
+        }
+
+        pagesReadAmount[0] = booksPagesReadAmount;
+        pagesReadAmount[1] = magazinesPagesReadAmount;
+
+        return pagesReadAmount;
+    }
+
 }
