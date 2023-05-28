@@ -239,6 +239,20 @@ public abstract class User {
 
     }
 
+    public Product searchProductById(String id) {
+        Product product = null;
+        boolean isFound = false;
+
+        for(int i = 0; i < products.size() && !isFound; i++) {
+            if(products.get(i).getId().equals(id)) {
+                product = products.get(i);
+                isFound = true;
+            }
+        }
+
+        return product;
+    }
+
     public boolean hasProduct(Product product){
         return products.contains(product);
     }
@@ -255,23 +269,23 @@ public abstract class User {
         return magazine;
     }
 
-    public int[] getTotalPagesReadAmountPerProductType() {
-        int[] pagesReadAmount = new int[2];
-        int booksPagesReadAmount = 0;
-        int magazinesPagesReadAmount = 0;
-        
-        for(Product product : products) {
-            if(product instanceof Book) {
-                booksPagesReadAmount += ((Book)product).getPagesReadAmount();
-            } else if(product instanceof Magazine) {
-                magazinesPagesReadAmount += ((Magazine)product).getPagesReadAmount();
+    public Product searchProductByCoord(String productCoord) {
+        Product product = null;
+        int row;
+        int column;
+
+        if(productCoord.charAt(1) == ',') {
+            row = Integer.parseInt(productCoord.split(",")[0]);
+            column = Integer.parseInt(productCoord.split(",")[1]);
+
+            if(row >= 0 && row < 5 && column >= 0 && column < 5) {
+                product = searchProductById(library.getProductIdByCoord(row, column));
             }
+
         }
 
-        pagesReadAmount[0] = booksPagesReadAmount;
-        pagesReadAmount[1] = magazinesPagesReadAmount;
-
-        return pagesReadAmount;
+        return product;
     }
+
 
 }

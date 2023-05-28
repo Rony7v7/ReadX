@@ -76,30 +76,28 @@ public class ReadXSystem {
         registerUser("UserPremiumTestLibrary", "3", 2);
 
         for(int i = 0; i < 26; i++) {
-            registerProduct("Book"+i, (i*10), "01/01/2000", "www.urlB"+i, (i*10), (i > 3)? (Integer)(i/3):i, "review"+i);
-
-            registerProduct("Magazine"+i, (i*10), "01/01/2000", "www.urlM"+i, (i*10), (i > 3)? (Integer)(i/3):i, (i > 4)? (Integer)(i/4):i);
+            registerProduct("Book"+i, 100, ("01/01/200"+i), "www.urlB"+i,i*10 ,((int) (Math.random() * 3) + 1), "review"+i);
+            registerProduct("Magazine"+i, 100, "01/01/200"+i, "www.urlM"+i, i*10, ((int) (Math.random() * 3) + 1), ((int) (Math.random() * 4) + 1));
         }
 
         for(int i = 0; i < products.size(); i++) {
             addProductToCart(products.get(i).getId(), "3");
         }
         
+        searchUserById("3").updateProductSoldInfo();
         purchaseCart("3");
 
         registerProduct("The Great Gatsby", 300, "01/01/2022", "https://www.example.com/book1", 19.99, 2, "Excellent book, highly recommended.");
         registerProduct("Cien años de soledad", 400, "15/05/2021", "https://www.example.com/book2", 15.99, 1, "A masterpiece of literature.");
         registerProduct("1984", 250, "10/03/2022", "https://www.example.com/book3", 12.99, 3, "A fascinating dystopia.");
-        registerProduct("Pride and Prejudice", 350, "20/02/2022", "https://www.example.com/book4", 16.99, 4, "A classic love story.");
+        registerProduct("Pride and Prejudice", 350, "20/02/2022", "https://www.example.com/book4", 16.99, 3, "A classic love story.");
         registerProduct("La sombra del viento", 500, "05/11/2021", "https://www.example.com/book5", 14.99, 2, "Intrigue and mystery on the streets of Barcelona.");
 
-        registerProduct("National Geographic", 100, "01/01/2022", "https://www.example.com/magazine1", 9.99, 1, 12);
+        registerProduct("National Geographic", 100, "01/01/2022", "https://www.example.com/magazine1", 9.99, 1, 2);
         registerProduct("Time", 50, "01/02/2022", "https://www.example.com/magazine2", 7.99, 2, 4);
-        registerProduct("Vogue", 120, "01/03/2022", "https://www.example.com/magazine3", 12.99, 3, 6);
-        registerProduct("Wired", 80, "01/04/2022", "https://www.example.com/magazine4", 8.99, 4, 8);
-        registerProduct("Scientific American", 70, "01/05/2022", "https://www.example.com/magazine5", 10.99, 5, 1);
-
-
+        registerProduct("Vogue", 120, "01/03/2022", "https://www.example.com/magazine3", 12.99, 3, 3);
+        registerProduct("Wired", 80, "01/04/2022", "https://www.example.com/magazine4", 8.99, 1, 1);
+        registerProduct("Scientific American", 70, "01/05/2022", "https://www.example.com/magazine5", 10.99, 2, 1);
 
     }
 
@@ -215,11 +213,23 @@ public class ReadXSystem {
         return msg;
     }
 
-    public String initReadingSession(String userId, String productId, char option) {
-        String msg = "\nId not found.";
+    /**
+     * This method initializes a reading session with a specific option (A,D) or the product's id or 
+     * the product's coordinates
+     * @param userId
+     * @param productLink
+     * @param option
+     * @return
+     */
+    public String initReadingSession(String userId, String productLink, char option) {
+        String msg = " ";
+        Product product = searchProductById(productLink);
 
-        Product product = searchProductById(productId);
         User user = searchUserById(userId);
+
+        if(productLink.contains(",") && !user.hasProduct(product)) {
+            product = user.searchProductByCoord(productLink);
+        }
 
         if(product != null) {
             msg = user.initReadingSession(product, option);
@@ -228,6 +238,12 @@ public class ReadXSystem {
         return msg;
     } 
 
+    /**
+     * This method returns the user's library in a specifc page
+     * @param userId
+     * @param page
+     * @return Library to String
+     */
     public String getLibrary(String userId, int page) {
         String msg = "\nId not found.";
 
@@ -240,6 +256,12 @@ public class ReadXSystem {
         return msg;
     }
 
+    /**
+     * This method navigates and validates the user's library inputs
+     * @param option
+     * @param userId
+     * @return Library to String with the option executed
+     */
     public String navigateLibrary(String option, String userId) {
         String msg = "\nId not found.";
         User user = searchUserById(userId);
@@ -252,6 +274,11 @@ public class ReadXSystem {
 
     }
 
+    /**
+     * This method generates a report depends on the report type
+     * @param reportType
+     * @return
+     */
     public String generateReports(int reportType){
         String msg = "\nInvalid option";
 
@@ -260,33 +287,213 @@ public class ReadXSystem {
                 msg = getReportOfTotalPagesReadAmount();
                 break;
             case 2:
+                msg = getReportOfTheMostGenreAndCategoryRead();
                 break;
                 
             case 3:
+                msg = getTop5BooksAndTop5MagazinesMostRead();
+                break;
+            
+            case 4:
+                msg = getReportOfBooksSoldAmountPerGenre();
+                break;
+            
+            case 5:
+                msg = getReportOfSubscriptionsActivesAmountInMagazines();
                 break;
         }
 
         return msg;
     }
 
+    /**
+     * This method generates a report of the total accumulated number of pages read by product type
+     * @return
+     */
     public String getReportOfTotalPagesReadAmount(){
         String report = null;
         
         int totalPagesReadAmountInBook = 0;
         int totalPagesReadAmountInMagazine = 0;
 
-        int[] totalPagesReadAmountPerProductType;;
 
-        for(User user : users) {
-            totalPagesReadAmountPerProductType = user.getTotalPagesReadAmountPerProductType();
-
-            totalPagesReadAmountInBook += totalPagesReadAmountPerProductType[0];
-            totalPagesReadAmountInMagazine += totalPagesReadAmountPerProductType[1];
+        for(Product product : products){
+            if(product instanceof Book) {
+                totalPagesReadAmountInBook += product.getPagesReadAmount();
+            } else if(product instanceof Magazine) {
+                totalPagesReadAmountInMagazine += product.getPagesReadAmount();
+            }
         }
-        
-        report =    "\nTotal accumulated number of pages read by product type\n"+
+
+        report =    "\n-Total accumulated number of pages read by product type\n"+
                     "\nTotal pages read amount in books: "+totalPagesReadAmountInBook+
                     "\nTotal pages read amount in magazines: "+totalPagesReadAmountInMagazine;
+
+        return report;
+    }
+
+    public String getReportOfTheMostGenreAndCategoryRead(){
+        String report = null;
+
+        int genreSienceFiction = 0;
+        int genreFantasy = 0;
+        int genreHistoricalNovel = 0;
+        
+        int categoryVarieties = 0;
+        int categoryDesign = 0;
+        int categoryScientific = 0;
+
+        int genreMax = 0;
+        int categoryMax = 0;
+
+        String genreMaxName;
+        String categoryMaxName;
+
+        for(Product product : products) {
+
+            if(product instanceof Book) {
+
+                switch(((Book) product).getGenre()) {
+                    case SCIENCE_FICTION: genreSienceFiction += product.getPagesReadAmount();
+                        break;
+                    case FANTASY: genreFantasy += product.getPagesReadAmount();
+                        break;
+                    case HISTORICAL_NOVEL: genreHistoricalNovel += product.getPagesReadAmount();
+                        break;
+                }
+
+            } else if(product instanceof Magazine) {
+
+                switch(((Magazine)product).getCategory()) {
+                    case VARIETIES: categoryVarieties += product.getPagesReadAmount();
+                        break;
+                    case DESIGN: categoryDesign += product.getPagesReadAmount();
+                        break;
+                    case SCIENTIFIC: categoryScientific += product.getPagesReadAmount();
+                        break;
+                }
+
+            }
+
+        }
+
+        genreMax = Math.max(genreSienceFiction, Math.max(genreFantasy, genreHistoricalNovel));
+        categoryMax = Math.max(categoryVarieties, Math.max(categoryDesign, categoryScientific));
+        
+        //Find the max genre
+        if(genreMax == genreSienceFiction) {
+            genreMaxName = "Science Fiction";
+        } else if(genreMax == genreFantasy) {
+            genreMaxName = "Fantasy";
+        } else {
+            genreMaxName = "Historical Novel";
+        }
+
+        //Find the max category
+        if(categoryMax == categoryVarieties) {
+            categoryMaxName = "Varieties";
+        } else if(categoryMax == categoryDesign) {
+            categoryMaxName = "Design";
+        } else {
+            categoryMaxName = "Scientific";
+        }
+
+        report = "\n-Report of the most genre and category read\n"+
+                 "\nGenre "+genreMaxName+" with "+ genreMax+" pages read."+
+                 "\nCategory "+categoryMaxName+" with "+ categoryMax+" pages read.";
+
+        return report;
+    }
+
+    public String getTop5BooksAndTop5MagazinesMostRead() {
+        String report1 = "";
+        String report2 = "";
+
+        int booksIndex = 0;
+        int magazinesIndex = 0;
+
+        sortProductsByPagesReadAmount();
+
+        for(Product product : products) {
+            if(product instanceof Book && booksIndex < 5) {
+                booksIndex++;
+                report1 += "\n"+booksIndex+". "+product.getName()+" | "+product.getPagesReadAmount();
+
+            } else if(product instanceof Magazine && magazinesIndex < 5) {
+                magazinesIndex++;
+                report2 += "\n"+magazinesIndex+". "+product.getName()+" | "+product.getPagesReadAmount();
+            }
+        }
+
+        String report = "\n-Top 5 Books and Magazines most read\n"+
+                        "\nTop 5 Books most read" + 
+                        report1 + "\n" +  
+                        "\nTop 5 Magazines most read" + 
+                        report2;
+    
+        return report;
+    }
+
+    public String getReportOfBooksSoldAmountPerGenre() {
+        String report = null;
+
+        int genreSienceFiction = 0;
+        int genreFantasy = 0;
+        int genreHistoricalNovel = 0;
+
+        for(Product product : products) {
+
+            if(product instanceof Book) {
+
+                switch (( ( Book )( product ) ).getGenre()) {
+                    case SCIENCE_FICTION: genreSienceFiction += ((Book)(product)).getCopiesSoldAmount();
+                        break;
+                
+                    case FANTASY: genreFantasy += ((Book)(product)).getCopiesSoldAmount();
+                        break;
+
+                    case HISTORICAL_NOVEL: genreHistoricalNovel += ((Book)(product)).getCopiesSoldAmount();
+                        break;
+                }
+            }
+        }
+
+        report = "\n-Copies sold of books per genre\n"+
+                 "\nScience Fiction: "+genreSienceFiction+
+                 "\nFantasy: "+genreFantasy+
+                 "\nHistorical Novel: "+genreHistoricalNovel;
+
+        return report;
+    }
+
+    public String getReportOfSubscriptionsActivesAmountInMagazines() {
+        String report = null;
+
+        int categoryVarieties = 0;
+        int categoryDesign = 0;
+        int categoryScientific = 0;
+
+        for(Product product : products) {
+
+            if(product instanceof Magazine) {
+
+                switch (( ( Magazine )( product ) ).getCategory()) {
+                    case VARIETIES: categoryVarieties += ((Magazine)(product)).getSubscriptionsActivesAmount();
+                        break;
+                
+                    case DESIGN: categoryDesign += ((Magazine)(product)).getSubscriptionsActivesAmount();
+                        break;
+
+                    case SCIENTIFIC: categoryScientific += ((Magazine)(product)).getSubscriptionsActivesAmount();
+                        break;
+                }
+            }
+        }
+
+        report = "\n-Subscriptions acitves amount of magazines per category\n"+
+                 "\nVarieties: "+ categoryVarieties+
+                 "\nDesign: "+ categoryDesign+
+                 "\nScientific: "+ categoryScientific;
 
         return report;
     }
@@ -306,11 +513,6 @@ public class ReadXSystem {
         }
 
         return product;
-    }
-
-    public Product searchProductByCoord() {
-
-        return null;
     }
 
     public String getProductsInfo() {
@@ -386,6 +588,10 @@ public class ReadXSystem {
         }
 
         return magazines;
+    }
+
+    public void sortProductsByPagesReadAmount() {
+        products.sort((product1, product2) -> Integer.compare(product2.getPagesReadAmount(), product1.getPagesReadAmount()));
     }
 
 }

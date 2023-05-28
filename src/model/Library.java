@@ -10,7 +10,7 @@ public class Library {
     private ArrayList<String[]> productsMatrix;
 
     private int ROWS = 5;
-    private static final int COLUMNS = 5;
+    static final int COLUMNS = 5;
 
     private int currentPage;
     
@@ -23,6 +23,17 @@ public class Library {
         arraylistToMatrix();
 
         currentPage = 0;
+    }
+
+    /**
+     * @return the rOWS
+     */
+    public int getROWS() {
+        return ROWS;
+    }
+
+    public String getProductIdByCoord(int row, int column) {
+        return productsMatrix.get(row+(currentPage*5))[column];
     }
 
     public void nextPage() {

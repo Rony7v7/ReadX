@@ -1,19 +1,8 @@
 /* 
  * DUDAS:
  * 
- * Cancelar suscripciones a revistas
- * 
- *  Implements Comparable              CompareTo
- * 
- * Se puede usar un metodo para solicitar ids 
- * 
- * Para los reportes hay que ordenar el array +||-
- * 
- * Metodo para verificar si el usuario existe
- * 
  * Anuncios
- * 
- * Buscar por coordenadas
+ * Para desuscribirse de una revista si no hay revistas púes no sale nada
  * 
 */
 
@@ -64,7 +53,7 @@ public class Main{
                          " >> \u001B[0m ");
 
         option = input.nextInt();
-        input.nextLine(); // Limpiar
+        input.nextLine();
 
         cleanScreen(false);
 
@@ -442,7 +431,7 @@ public class Main{
                         msg = controller.navigateLibrary(option, userId);
                         System.out.println(msg);
     
-                    } else if(controller.userHasProduct(userId, option)){
+                    } else if(option.length() == 3 ){
                         initReadingSession(userId, option);
                     } else {
                         System.out.println("\nId or coordinates not found.");
@@ -469,9 +458,14 @@ public class Main{
             cleanScreen(false);
             msg = controller.initReadingSession(userId, productLink, option);
 
-            System.out.print(msg+"\n>> ");
-            option = input.next().charAt(0);
-            input.nextLine();
+            option = 'S';
+            if(!msg.isBlank()) {
+                System.out.print(msg+"\n>> ");
+                option = input.next().charAt(0);
+                input.nextLine();
+            } else {
+                System.out.println("\nId or coordinates not found.");
+            }
             
             if(option != 'A' && option != 'D' && option != 'S') {
                 System.out.println("\nInvalid option.");
@@ -488,7 +482,7 @@ public class Main{
         System.out.println("-------- GENERATE REPORTS --------\n");
         System.out.println( "Choose the report you want to generate: \n"+
                             "\n1. Total accumulated number of pages read by product type"+
-                            "\n2. Most read genres and categories"+
+                            "\n2. Most read genre and categorie"+
                             "\n3. Top 5 most-read books and Top 5 most-read magazines"+
                             "\n4. Sales report by genre"+
                             "\n5. Subscriptions report by category"
@@ -499,6 +493,7 @@ public class Main{
 
         System.out.println(msg);
     }
+    
     //---------------------------------------------------
     
     public int validateIntInRange(int min, int max) {

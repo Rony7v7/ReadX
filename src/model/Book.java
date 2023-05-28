@@ -34,7 +34,7 @@ public class Book extends Product {
      * @return the genre
      */
     public Genre getGenre() {
-        return genre;
+        return this.genre;
     }
 
     /**

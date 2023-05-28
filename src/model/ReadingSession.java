@@ -47,4 +47,5 @@ public class ReadingSession {
     public Product getProduct() {
         return product;
     }
+
 }
