@@ -499,7 +499,7 @@ public class ReadXSystem {
         return report;
     }
 
-    //-------------------Others-------------------
+    //------------------- OTHERS -------------------
 
     public Product searchProductById(String id) {
         Product product = null;

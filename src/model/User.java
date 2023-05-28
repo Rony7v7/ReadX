@@ -84,8 +84,7 @@ public abstract class User {
     }
 
     public String getMagazinesToString(){
-        String magazinesInfo = "";
-
+        String magazinesInfo = " \n";
         for(Product product : products) {
             if(product instanceof Magazine) {
                 magazinesInfo += "> "+product.getName()+" | "+product.getId()+"\n";

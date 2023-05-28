@@ -1,11 +1,3 @@
-/* 
- * DUDAS:
- * 
- * Anuncios
- * Para desuscribirse de una revista si no hay revistas púes no sale nada
- * 
-*/
-
 package ui;
 
 import java.util.Scanner;
@@ -379,12 +371,11 @@ public class Main{
             System.out.print("Type user id: ");
 
             userId = input.nextLine();
-            System.out.println(" ");
-
             msg = "\nUser not found.";
+            
+            magazinesInfo = controller.getUserMagazines(userId);
 
-            if(controller.searchUserById(userId) != null) {
-                magazinesInfo = controller.getUserMagazines(userId);
+            if(controller.searchUserById(userId) != null && !(magazinesInfo.isBlank()) ) {
 
                 System.out.println(magazinesInfo);
                 System.out.print("Type magazine id: ");
@@ -392,6 +383,8 @@ public class Main{
                 magazineId = input.nextLine();
 
                 msg = controller.cancelMagazineSubscription(userId, magazineId);
+            } else {
+                msg = "There are no magazines to cancel subscription.";
             }
 
         }
