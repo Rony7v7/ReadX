@@ -3,16 +3,29 @@ package ui;
 import java.util.Scanner;
 import model.ReadXSystem;
 
+/**
+ * Constructs a Main object that serves as the user interface for the ReadXSystem application.
+ * It provides methods for displaying the menu, handling user input, and executing the selected options.
+ */
 public class Main{
 
     private ReadXSystem controller;
     private Scanner input;
 
+    /**
+     * Creates a new Main object and initializes the controller and input scanner.
+     */
     public Main(){
         this.controller = new ReadXSystem();
         this.input = new Scanner(System.in);
     }
 
+    /**
+     * The main method of the application.
+     * It creates an instance of Main, initializes the ReadXSystem, displays the menu, and handles user input until the user chooses to exit.
+     *
+     * @param args The command-line arguments.
+     */
     public static void main(String[] args) {
         Main view = new Main();
         int option = 0;
@@ -27,6 +40,11 @@ public class Main{
         }
     }
 
+    /**
+     * Displays the menu to the user and retrieves their choice.
+     *
+     * @return The user's menu choice.
+     */    
     public int showMenu() {
         int option = 0;
 
@@ -52,6 +70,11 @@ public class Main{
         return option;
     }
 
+    /**
+     * Clears the screen and optionally prompts the user to press enter.
+     *
+     * @param needEnter Indicates whether the user should be prompted to press enter.
+     */
     public void cleanScreen(boolean needEnter) {
         if(needEnter) {
             System.out.print("\nEnter to continue");
@@ -62,6 +85,11 @@ public class Main{
         System.out.flush();
     }
 
+    /**
+     * Executes the selected option based on the user's choice.
+     *
+     * @param option The user's menu choice.
+     */
     public void executeOption(int option) {
     
         switch (option) {
@@ -105,6 +133,9 @@ public class Main{
         cleanScreen(true);
     }
 
+    /**
+     * Registers a new user by prompting for their name, ID, and user plan.
+     */
     public void registerUser() {
         String name;
         String id;
@@ -129,6 +160,9 @@ public class Main{
 
     }
 
+    /**
+     * Registers a new product by prompting for its details and type.
+     */
     public void registerProduct() {
         int productType;
         String name;
@@ -196,7 +230,10 @@ public class Main{
         System.out.println(msg);
 
     }
-
+    
+    /**
+     * Modifies an existing product by prompting for the product ID and the new details.
+     */
     public void modifyProduct() {
 
         String msg = "There are no products to modify.";
@@ -291,6 +328,9 @@ public class Main{
         System.out.println(msg);
     } 
 
+    /**
+     * Deletes a product by prompting for the product ID.
+     */
     public void deleteProduct() {
         String productsInfo = controller.getProductsInfo();
         String msg = "There are no products to delete.";
@@ -308,6 +348,9 @@ public class Main{
         System.out.println(msg);
     }
 
+    /**
+     * Allows a user to purchase a product by adding it to their cart.
+     */
     public void purchaseProduct() {
         String productsInfo = controller.getProductsInfo();
         String usersInfo = controller.getUsersInfo();
@@ -354,6 +397,9 @@ public class Main{
 
     }
 
+    /**
+     * Cancels a magazine subscription for a user by removing it from their subscriptions.
+     */
     public void cancelMagazineSubscription() {
         String usersInfo = controller.getUsersInfo();
         String magazinesInfo;
@@ -392,6 +438,9 @@ public class Main{
         System.out.println(msg);
     }
 
+    /**
+     * Displays the user's library and allows navigation through the library.
+     */
     public void showLibrary() {
         String userId;
         String usersInfo = controller.getUsersInfo();
@@ -443,6 +492,12 @@ public class Main{
 
     }
 
+    /**
+     * Initializes a reading session for a user and a specific product.
+     *
+     * @param userId      The ID of the user.
+     * @param productLink The link or identifier of the product.
+     */
     public void initReadingSession(String userId, String productLink) {
         char option = ' ';
         String msg;
@@ -468,6 +523,9 @@ public class Main{
 
     } 
 
+    /**
+     * Generates reports based on the user's choice.
+     */
     public void generateReports(){
         String msg = " ";
         int option;
@@ -489,6 +547,13 @@ public class Main{
     
     //---------------------------------------------------
     
+    /**
+     * Validates an integer input within the specified range.
+     *
+     * @param min The minimum allowed value.
+     * @param max The maximum allowed value.
+     * @return The validated integer input.
+     */
     public int validateIntInRange(int min, int max) {
 
         int option = 0;

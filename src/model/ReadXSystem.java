@@ -6,7 +6,11 @@ import java.text.SimpleDateFormat;
 import java.text.ParsePosition;
 import java.util.Calendar;
 
-
+/**
+ * This class represents a controller system.
+ * It provides functionalities for manage users, managing products,
+ * making purchases, generating reports, and mainly to manage the system.
+ */
 public class ReadXSystem {
     
     private ArrayList<User> users;
@@ -19,6 +23,14 @@ public class ReadXSystem {
 
     //----------- REQUIERMENTS -----------------
     
+    /**
+     * Registers a new user with the given name, ID, and type.
+     * 
+     * @param name  The name of the user.
+     * @param id    The ID of the user.
+     * @param type  The type of the user.
+     * @return A success message indicating the user registration.
+     */
     public String registerUser(String name, String id, int type){
 
         String msg = "\nUser registered succesfully.";
@@ -39,6 +51,18 @@ public class ReadXSystem {
     }
 
     //Register book
+    /**
+     * Registers a new book with the given details.
+     * 
+     * @param name The name of the book.
+     * @param pagesAmount The number of pages in the book.
+     * @param publishDateString The publish date of the book in string format.
+     * @param url The URL of the book.
+     * @param price The price of the book.
+     * @param genre The genre of the book.
+     * @param review The review of the book.
+     * @return A success message indicating the book registration.
+     */
     public String registerProduct(String name, int pagesAmount, String publishDateString, String url,  double price, int genre, String review) {
 
         String msg = "\nBook registered succesfully";
@@ -55,6 +79,18 @@ public class ReadXSystem {
     }
 
     //register magazine
+    /**
+     * Registers a new magazine with the given details.
+     * 
+     * @param name The name of the magazine.
+     * @param pagesAmount The number of pages in the magazine.
+     * @param publishDateString The publish date of the magazine in string format.
+     * @param url The URL of the magazine.
+     * @param price The price of the magazine.
+     * @param category The category of the magazine.
+     * @param issueFrecuency The issue frequency of the magazine.
+     * @return A success message indicating the magazine registration.
+     */
     public String registerProduct(String name, int pagesAmount, String publishDateString, String url, double price, int category,int issueFrecuency) {
 
         String msg = "\nMagazine registered succesfully";
@@ -69,6 +105,9 @@ public class ReadXSystem {
         return msg;
     }
 
+    /**
+     * Initializes the system by registering users and products.
+     */
     public void initSystem() {
         
         registerUser("UserStandard", "1", 1);
@@ -101,6 +140,21 @@ public class ReadXSystem {
 
     }
 
+    /**
+     * Modifies a product with the given ID and updated details. If the user dont want to modify a field, he must enter '0'.
+     * 
+     * @param id The ID of the product to modify.
+     * @param name The updated name of the product.
+     * @param pagesAmount The updated number of pages in the product.
+     * @param publishDateString The updated publish date of the product in string format.
+     * @param url The updated URL of the product.
+     * @param price The updated price of the product.
+     * @param genre The updated genre of the product (applicable for books).
+     * @param review The updated review of the product (applicable for books).
+     * @param category The updated category of the product (applicable for magazines).
+     * @param issueFrecuency The updated issue frequency of the product (applicable for magazines).
+     * @return A success message indicating the product modification.
+     */
     public String modifyProduct(String id,String name, int pagesAmount, String publishDateString, String url,  float price, int genre, String review, int category,int issueFrecuency) {
 
         Product product = searchProductById(id);
@@ -149,6 +203,12 @@ public class ReadXSystem {
         return "\nProduct modified succesfully";
     }
 
+    /**
+     * Deletes a product with the given ID.
+     * 
+     * @param id The ID of the product to delete.
+     * @return A success message indicating the product deletion.
+     */
     public String deleteProduct(String id) {
         
         Product product = searchProductById(id);
@@ -169,6 +229,13 @@ public class ReadXSystem {
         return msg;
     }
 
+    /**
+     * Adds a product with the given ID to the cart of a user with the specified ID.
+     * 
+     * @param productId The ID of the product to add to the cart.
+     * @param userId The ID of the user.
+     * @return A success message indicating the product addition to the cart.
+     */
     public String addProductToCart(String productId, String userId) {
         
         String msg = "\nId not found.";
@@ -183,6 +250,12 @@ public class ReadXSystem {
         return msg;
     }
 
+    /**
+     * Purchases the products in the cart of a user with the specified ID.
+     * 
+     * @param userId The ID of the user.
+     * @return A success message indicating the purchase of products.
+     */
     public String purchaseCart(String userId) {
        
         String msg = "\nYou already own one or more of these products.";
@@ -202,6 +275,12 @@ public class ReadXSystem {
         return msg;
     }
 
+    /**
+     * Cancels a magazine subscription for a user with the specified ID.
+     * 
+     * @param userId The ID of the user.
+     * @return A success message indicating the cancellation of the magazine subscription.
+     */
     public String cancelMagazineSubscription(String userId, String magazineId) {
         String msg = "\nId not found.";
         User user = searchUserById(userId);
@@ -216,10 +295,10 @@ public class ReadXSystem {
     /**
      * This method initializes a reading session with a specific option (A,D) or the product's id or 
      * the product's coordinates
-     * @param userId
-     * @param productLink
-     * @param option
-     * @return
+     * @param userId the user's id
+     * @param productLink the product's id or coordinates
+     * @param option the option to initialize the reading session
+     * @return a message indicating the reading session
      */
     public String initReadingSession(String userId, String productLink, char option) {
         String msg = " ";
@@ -241,8 +320,8 @@ public class ReadXSystem {
 
     /**
      * This method returns the user's library in a specifc page
-     * @param userId
-     * @param page
+     * @param userId the user's id
+     * @param page the page to show
      * @return Library to String
      */
     public String getLibrary(String userId, int page) {
@@ -259,8 +338,8 @@ public class ReadXSystem {
 
     /**
      * This method navigates and validates the user's library inputs
-     * @param option
-     * @param userId
+     * @param option the option to navigate (A,D)
+     * @param userId the user's id
      * @return Library to String with the option executed
      */
     public String navigateLibrary(String option, String userId) {
@@ -277,8 +356,8 @@ public class ReadXSystem {
 
     /**
      * This method generates a report depends on the report type
-     * @param reportType
-     * @return
+     * @param reportType the report type (1,2,3,4,5)
+     * @return the report
      */
     public String generateReports(int reportType){
         String msg = "\nInvalid option";
@@ -308,8 +387,8 @@ public class ReadXSystem {
     }
 
     /**
-     * This method generates a report of the total accumulated number of pages read by product type
-     * @return
+     * This method generates a report of the total accumulated number of pages read by product type.
+     * @return The report of the total accumulated number of pages read by product type.
      */
     public String getReportOfTotalPagesReadAmount(){
         String report = null;
@@ -333,6 +412,10 @@ public class ReadXSystem {
         return report;
     }
 
+    /**
+     * This method generates a report of the most read genre and category.
+     * @return The report of the most read genre and category.
+     */
     public String getReportOfTheMostGenreAndCategoryRead(){
         String report = null;
 
@@ -406,6 +489,10 @@ public class ReadXSystem {
         return report;
     }
 
+    /**
+     * This method generates a report of the top 5 most read books and magazines.
+     * @return The report of the top 5 most read books and magazines.
+     */
     public String getTop5BooksAndTop5MagazinesMostRead() {
         String report1 = "";
         String report2 = "";
@@ -435,6 +522,10 @@ public class ReadXSystem {
         return report;
     }
 
+    /**
+     * This method generates a report of the number of books sold per genre.
+     * @return The report of the number of books sold per genre.
+     */
     public String getReportOfBooksSoldAmountPerGenre() {
         String report = null;
 
@@ -467,6 +558,10 @@ public class ReadXSystem {
         return report;
     }
 
+    /**
+     * This method generates a report of the active subscriptions amount in magazines per category.
+     * @return The report of the active subscriptions amount in magazines per category.
+     */
     public String getReportOfSubscriptionsActivesAmountInMagazines() {
         String report = null;
 
@@ -501,6 +596,11 @@ public class ReadXSystem {
 
     //------------------- OTHERS -------------------
 
+    /**
+     * This method searches for a product by its ID.
+     * @param id The ID of the product to search for.
+     * @return The product found, or null if not found.
+     */
     public Product searchProductById(String id) {
         Product product = null;
         boolean isFound =  false;
@@ -516,6 +616,10 @@ public class ReadXSystem {
         return product;
     }
 
+    /**
+     * This method generates a string containing information about all products.
+     * @return The string containing information about all products.
+     */
     public String getProductsInfo() {
         String productsInfo = "";
 
@@ -526,12 +630,22 @@ public class ReadXSystem {
         return productsInfo;
     }
 
+    /**
+     * This method retrieves the full information of a product by its ID.
+     * @param id The ID of the product.
+     * @return The full information of the product.
+     */
     public String getFullProductInfo(String id) {
         Product product = searchProductById(id);
 
         return product.toString();
     }
     
+    /**
+     * This method determines the type of a product based on its ID.
+     * @param id The ID of the product.
+     * @return The type of the product: 0 for unknown, 1 for Book, 2 for Magazine.
+     */
     public int getProductType(String id) {
         int type = 0;
         Product product = searchProductById(id);
@@ -545,6 +659,11 @@ public class ReadXSystem {
         return type;
     }
 
+    /**
+     * This method searches for a user by their ID.
+     * @param id The ID of the user to search for.
+     * @return The user found, or null if not found.
+     */
     public User searchUserById(String id) {
         User user = null;
         Boolean isFound = false;
@@ -558,6 +677,10 @@ public class ReadXSystem {
         return user;
     }
 
+    /**
+     * This method generates a string containing information about all users.
+     * @return The string containing information about all users.
+     */
     public String getUsersInfo() {
         String usersInfo = ""; 
 
@@ -568,6 +691,12 @@ public class ReadXSystem {
         return usersInfo;
     }
 
+    /**
+     * This method checks if a user has a specific product.
+     * @param userId The ID of the user.
+     * @param productId The ID of the product.
+     * @return True if the user has the product, false otherwise.
+     */
     public Boolean userHasProduct(String userId, String productId) {
         Boolean hasProduct = false;
         User user = searchUserById(userId);
@@ -580,6 +709,11 @@ public class ReadXSystem {
 
     }
 
+    /**
+     * This method retrieves a string representation of the magazines owned by a user.
+     * @param userId The ID of the user.
+     * @return The string representation of the user's magazines.
+     */
     public String getUserMagazines(String userId) {
         String magazines = "";
         User user = searchUserById(userId);
@@ -591,6 +725,9 @@ public class ReadXSystem {
         return magazines;
     }
 
+    /**
+     * This method sorts the products by the number of pages read in descending order.
+     */
     public void sortProductsByPagesReadAmount() {
         products.sort((product1, product2) -> Integer.compare(product2.getPagesReadAmount(), product1.getPagesReadAmount()));
     }

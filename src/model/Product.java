@@ -2,6 +2,12 @@ package model;
 
 import java.util.Calendar;
 
+/**
+ * The abstract class representing a product.
+ * A product has a name, pages amount, publish date, URL, price, pages read amount, and ID.
+ * It provides methods to retrieve and modify these attributes.
+ * This class serves as a base class for specific product types, such books and magazines.
+ */
 public abstract class Product {
 
     protected String name;
@@ -12,6 +18,15 @@ public abstract class Product {
     protected int pagesReadAmount;
     protected String id;
 
+    /**
+     * Constructs a Product object with the given name, pages amount, publish date, URL, and price.
+     *
+     * @param name         The name of the product.
+     * @param pagesAmount  The amount of pages in the product.
+     * @param publishDate  The publish date of the product.
+     * @param url          The URL of the product.
+     * @param price        The price of the product.
+     */
     public Product(String name, int pagesAmount, Calendar publishDate, String url, double price) {
         this.name = name;
         this.pagesAmount = pagesAmount;
@@ -22,6 +37,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's name.
+     * 
      * @return the name
      */
     public String getName() {
@@ -29,6 +46,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's name.
+     * 
      * @param name the name to set
      */
     public void setName(String name) {
@@ -36,6 +55,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's pages amount.
+     * 
      * @return the pagesAmount
      */
     public int getPagesAmount() {
@@ -43,6 +64,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's pages amount.
+     * 
      * @param pagesAmount the pagesAmount to set
      */
     public void setPagesAmount(int pagesAmount) {
@@ -50,6 +73,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's pages read amount.
+     * 
      * @return the pagesReadAmount
      */
     public int getPagesReadAmount() {
@@ -57,6 +82,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's pages read amount.
+     * 
      * @param pagesReadAmount the pagesReadAmount to set
      */
     public void updatePagesReadAmount(int newPages) {
@@ -64,6 +91,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's price.
+     * 
      * @return the price
      */
     public double getPrice() {
@@ -71,6 +100,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's price.
+     * 
      * @param price the price to set
      */
     public void setPrice(float price) {
@@ -78,6 +109,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's publish date.
+     * 
      * @return the publishDate
      */
     public Calendar getPublishDate() {
@@ -85,6 +118,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's publish date.
+     * 
      * @param publishDate the publishDate to set
      */
     public void setPublishDate(Calendar publishDate) {
@@ -92,6 +127,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's URL.
+     * 
      * @return the url
      */
     public String getUrl() {
@@ -99,6 +136,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's URL.
+     * 
      * @param url the url to set
      */
     public void setUrl(String url) {
@@ -106,6 +145,8 @@ public abstract class Product {
     }
 
     /**
+     * Returns the product's ID.
+     * 
      * @return the id
      */
     public String getId() {
@@ -113,6 +154,8 @@ public abstract class Product {
     }
 
     /**
+     * Sets the product's ID.
+     * 
      * @param id the id to set
      */
     public void setId(String id) {
@@ -121,6 +164,11 @@ public abstract class Product {
 
     //---------------------------------
 
+    /**
+     * Generates an ID for the product.
+     *
+     * @return The generated ID.
+     */
     public abstract String generateId();
 
 }

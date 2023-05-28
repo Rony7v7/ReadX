@@ -2,12 +2,27 @@ package model;
 
 import java.util.Calendar;
 
+/**
+ * Magazine class represents a magazine product.
+ * It extends the Product class and adds additional properties specific to magazines.
+ */
 public class Magazine extends Product {
 
     private int subscriptionsActivesAmount;
     private IssueFrecuency issueFrecuency;
     private Category category;
 
+    /**
+     * Constructs a Magazine object with the given parameters.
+     *
+     * @param name                     The name of the magazine.
+     * @param pagesAmount              The number of pages in the magazine.
+     * @param publishDate              The publish date of the magazine.
+     * @param url                      The URL of the magazine.
+     * @param price                    The price of the magazine.
+     * @param category                 The category of the magazine (1 for Varieties, 2 for Design, 3 for Scientific).
+     * @param issueFrecuency           The issue frequency of the magazine (1 for Diary, 2 for Weekly, 3 for Monthly, 4 for Yearly).
+     */
     public Magazine(String name, int pagesAmount, Calendar publishDate, String url, double price, int category,int issueFrecuency) {
 
         super(name, pagesAmount, publishDate, url, price);
@@ -45,6 +60,8 @@ public class Magazine extends Product {
     }
     
     /**
+     * Returns the number of active subscriptions of the magazine.
+     * 
      * @return the subscriptionsActivesAmount
      */
     public int getSubscriptionsActivesAmount() {
@@ -52,6 +69,8 @@ public class Magazine extends Product {
     }
 
     /**
+     * Sets the number of active subscriptions of the magazine.
+     * 
      * @param subscriptionsActivesAmount the subscriptionsActivesAmount to set
      */
     public void setSubscriptionsActivesAmount(int subscriptionsActivesAmount) {
@@ -59,13 +78,15 @@ public class Magazine extends Product {
     }
 
     /**
-     * sum 1 to subscriptionsActivesAmount
+     * Increments the number of active subscriptions of the magazine by 1.
      */
     public void updateSubscriptionsActivesAmount() {
         subscriptionsActivesAmount++;
     }
 
     /**
+     * returns the category of the magazine.
+     * 
      * @return the category
      */
     public Category getCategory() {
@@ -73,6 +94,8 @@ public class Magazine extends Product {
     }
 
     /**
+     * Sets the category of the magazine.
+     * 
      * @param category the category to set
      */
     public void setCategory(int category) {
@@ -90,6 +113,8 @@ public class Magazine extends Product {
     }
 
     /**
+     * Returns the issue frequency of the magazine. 
+     * 
      * @return the issueFrecuency
      */
     public IssueFrecuency getIssueFrecuency() {
@@ -97,6 +122,8 @@ public class Magazine extends Product {
     }
 
     /**
+     * Sets the issue frequency of the magazine.
+     *  
      * @param issueFrecuency the issueFrecuency to set
      */
     public void setIssueFrecuency(int issueFrecuency) {
@@ -117,6 +144,8 @@ public class Magazine extends Product {
     }
 
     /**
+     * Returns the id of the magazine.
+     * 
      * @return the id
      */
     public String getId() {
@@ -124,6 +153,8 @@ public class Magazine extends Product {
     }
 
     /**
+     * Sets the id of the magazine.
+     * 
      * @param id the id to set
      */
     public void setId(String id) {
@@ -132,6 +163,11 @@ public class Magazine extends Product {
 
     //-------------------------------------------------
 
+    /**
+     * Generates a unique identifier for the magazine.
+     *
+     * @return The generated unique identifier.
+     */
     @Override
     public String generateId() {
         String alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -144,6 +180,11 @@ public class Magazine extends Product {
         return id;
     }
 
+    /**
+     * Returns a string representation of the magazine object.
+     *
+     * @return A string representation of the magazine.
+     */
     @Override
     public String toString() {
         return    "· Name:               " + name +

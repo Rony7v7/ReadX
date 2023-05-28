@@ -3,6 +3,12 @@ package model;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+/**
+ * An abstract class representing a User.
+ * It contains information about the user's ID, name, and linking date.
+ * It also maintains lists of products, cart, bills, and reading sessions associated with the user.
+ * Additionally, it holds a reference to the user's library.
+ */
 public abstract class User {
 
     private String id;
@@ -18,6 +24,13 @@ public abstract class User {
 
     protected Library library;
     
+    /**
+     * Constructs a User object with the given name, ID, and linking date.
+     *
+     * @param name        The name of the user.
+     * @param id          The ID of the user.
+     * @param linkingDate The linking date of the user.
+     */
     public User(String name, String id, Calendar linkingDate){
         this.id = id;
         this.name = name;
@@ -35,6 +48,8 @@ public abstract class User {
     }
 
     /**
+     * Returns the user's ID.
+     * 
      * @return the id
      */
     public String getId() {
@@ -42,6 +57,8 @@ public abstract class User {
     }
 
     /**
+     * sets the user's ID.
+     * 
      * @param id the id to set
      */
     public void setId(String id) {
@@ -49,6 +66,8 @@ public abstract class User {
     }
 
     /**
+     * Returns the user's name.
+     * 
      * @return the name
      */
     public String getName() {
@@ -56,6 +75,8 @@ public abstract class User {
     }
 
     /**
+     * Sets the user's name.
+     * 
      * @param name the name to set
      */
     public void setName(String name) {
@@ -63,6 +84,8 @@ public abstract class User {
     }
 
     /**
+     * Returns the user's linking date.
+     * 
      * @return the linkingDate
      */
     public Calendar getLinkingDate() {
@@ -70,6 +93,8 @@ public abstract class User {
     }
 
     /**
+     * Sets the user's linking date.
+     * 
      * @param linkingDate the linkingDate to set
      */
     public void setLinkingDate(Calendar linkingDate) {
@@ -77,12 +102,19 @@ public abstract class User {
     }
     
     /**
+     * Returns the user's products
+     * 
      * @return the products
      */
     public ArrayList<Product> getProducts() {
         return products;
     }
 
+    /**
+     * Retrieves a string representation of magazines in the user's product list.
+     *
+     * @return A string containing information about the magazines in the user's product list.
+     */
     public String getMagazinesToString(){
         String magazinesInfo = " \n";
         for(Product product : products) {
@@ -95,6 +127,12 @@ public abstract class User {
     }
     
     //-------------------------------------------------
+
+    /**
+     * Retruns a string representation of the user's library.
+     *
+     * @return A string representation of the user's library.
+     */
     public String libraryToString(){
         if(!products.isEmpty()) {
             library.updateProducts();
@@ -103,6 +141,12 @@ public abstract class User {
         return library.toString();
     }
     
+    /**
+     * Navigates through the user's library based on the given option.
+     *
+     * @param option The navigation option ('A' for previous page, 'D' for next page, 'S' for returning to the main menu).
+     * @return A message indicating the result of the navigation.
+     */
     public String navigateLibrary(char option){
 
         String msg = "\nInvalid option.";
@@ -124,18 +168,39 @@ public abstract class User {
         return msg;
     }
 
+    /**
+     * Adds products to the user's collection.
+     *
+     * @return A string representation of the added products.
+     */
     public abstract String addProducts();
 
+    /**
+     * Deletes the specified product from the user's collection, and updates the library.
+     *
+     * @param product The product to delete.
+     */
     public void deleteProduct(Product product){
         products.remove(product);
         library.updateProducts();
     }
 
+    /**
+     * Returns a string representation of the user.
+     *
+     * @return A string representation of the user.
+     */
     @Override
     public String toString() {
         return "· "+name+ " | "+id;
     }
 
+    /**
+     * Adds the specified product to the user's cart for purchase.
+     *
+     * @param product The product to add to the cart.
+     * @return A message indicating the result of adding the product to the cart.
+     */
     public String addProductToCart(Product product) {
         String msg = "\nProduct pending purchase";
 
@@ -147,6 +212,11 @@ public abstract class User {
         return msg;
     }
 
+    /**
+     * Checks if there are any products common between the user's product list and the cart.
+     *
+     * @return true if there are intersecting products, false otherwise.
+     */
     public boolean productsIntersectCart() {
         boolean intersect = false;
         Product product;
@@ -163,6 +233,11 @@ public abstract class User {
         return intersect;
     }
 
+    /**
+     * Generates a bill for the products in the user's cart.
+     *
+     * @return A string representation of the generated bill.
+     */
     public String generateBill() {
         Bill bill = new Bill(cart);
         bills.add(bill);
@@ -170,6 +245,9 @@ public abstract class User {
         return bill.toString();
     }
 
+    /**
+     * Updates the sales information for the products in the user's cart.
+     */
     public void updateProductSoldInfo() {
         for(Product product : cart) {
             if(product instanceof Book) {
@@ -180,6 +258,12 @@ public abstract class User {
         }
     }
 
+    /**
+     * Cancels a magazine subscription based on the given ID.
+     *
+     * @param id The ID of the magazine subscription to cancel.
+     * @return A message indicating the result of canceling the subscription.
+     */
     public String cancelMagazineSubscription(String id) {
         String msg = "\nId not found.";
         Product magazine = searchMagazineById(id);
@@ -192,6 +276,14 @@ public abstract class User {
         return msg;
     }
 
+    /**
+     * Initializes a reading session for the specified product.
+     *
+     * @param product   The product for the reading session.
+     * @param option    The reading session option ('A' for previous page, 'D' for next page, other for current page).
+     * @param showAds   A flag indicating if ads should be shown during the reading session.
+     * @return A message containing the reading session information.
+     */
     public String initReadingSession(Product product, char option, boolean showAds) {
 
         ReadingSession readingSession = searchReadingSessionByProduct(product);
@@ -237,6 +329,12 @@ public abstract class User {
         return msg;
     }
 
+    /**
+     * Searches for a reading session associated with the specified product.
+     *
+     * @param product The product to search the reading session for.
+     * @return The reading session associated with the product, or null if not found.
+     */
     public ReadingSession searchReadingSessionByProduct(Product product) {
         boolean isFound = false;
         ReadingSession readingSession = null;
@@ -252,6 +350,12 @@ public abstract class User {
 
     }
 
+    /**
+     * Searches for a product with the specified ID in the user's product list.
+     *
+     * @param id The ID of the product to search for.
+     * @return The product with the specified ID, or null if not found.
+     */
     public Product searchProductById(String id) {
         Product product = null;
         boolean isFound = false;
@@ -266,10 +370,22 @@ public abstract class User {
         return product;
     }
 
+    /**
+     * Checks if the user has the specified product in their product list.
+     *
+     * @param product The product to check for.
+     * @return true if the user has the product, false otherwise.
+     */
     public boolean hasProduct(Product product){
         return products.contains(product);
     }
 
+    /**
+     * Searches for a magazine with the specified ID in the user's product list.
+     *
+     * @param id The ID of the magazine to search for.
+     * @return The magazine with the specified ID, or null if not found.
+     */
     public Product searchMagazineById(String id) {
         Product magazine = null;
 
@@ -282,6 +398,12 @@ public abstract class User {
         return magazine;
     }
 
+    /**
+     * Searches for a product in the user's library based on the given coordinate.
+     *
+     * @param productCoord The coordinate of the product to search for.
+     * @return The product found at the specified coordinate, or null if not found.
+     */
     public Product searchProductByCoord(String productCoord) {
         Product product = null;
         int row;
@@ -299,6 +421,5 @@ public abstract class User {
 
         return product;
     }
-
 
 }
