@@ -232,7 +232,8 @@ public class ReadXSystem {
         }
 
         if(product != null) {
-            msg = user.initReadingSession(product, option);
+            boolean showAds = user instanceof UserStandard;
+            msg = user.initReadingSession(product, option, showAds);
         }
 
         return msg;

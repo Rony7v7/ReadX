@@ -193,34 +193,48 @@ public abstract class User {
         return msg;
     }
 
-    public String initReadingSession(Product product, char option) {
+    public String initReadingSession(Product product, char option, boolean showAds) {
 
         ReadingSession readingSession = searchReadingSessionByProduct(product);
         
         String msg = null;
 
+        
         if(readingSession == null && hasProduct(product)) {
             readingSession = new ReadingSession(product);
             readingSessions.add(readingSession);
-
+            
         }
-
+        
         switch (option) {
             case 'D':
                 readingSession.nextPage();
                 msg = readingSession.toString();
                 break;
-        
-            case 'A':
+                
+                case 'A':
                 readingSession.previousPage();
                 msg = readingSession.toString();
                 break;
                 
-            default:
+                default:
                 msg = readingSession.toString();
                 break;
             }
-        
+            
+            if(showAds) {
+                String[] ads =  {"Subscribe to Combo Plus and get Disney+ and Star+ at an incredible price!",
+                            "Now your pets have a favorite app: Laika. The best products for your furry friend.",
+                            "It's our anniversary! Visit your nearest Éxito and be surprised with the best offers."};
+    
+                int currentPage = readingSession.getCurrentPage();
+    
+                if(currentPage == 1 || (currentPage%5==0 && readingSession.getProduct() instanceof Magazine) || (currentPage%20==0 && readingSession.getProduct() instanceof Book)) {
+                    msg = "\n"+ads[(int) (Math.random() * 3)] + msg;       
+                }
+    
+            }
+            
         return msg;
     }
 

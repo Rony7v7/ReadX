@@ -25,7 +25,6 @@ public class UserStandard extends User implements Limited {
         return bill;
     }
 
-
     @Override
     public boolean verifyPurchasingCapacity() {
         boolean canPurchase = true;
@@ -69,5 +68,5 @@ public class UserStandard extends User implements Limited {
 
         return productsAmount;
     }
-
+    
 }

@@ -18,6 +18,34 @@ public class ReadingSession {
 
     }
 
+    /**
+     * @return the currentPage
+     */
+    public int getCurrentPage() {
+        return currentPage;
+    }
+
+    /**
+     * @param currentPage the currentPage to set
+     */
+    public void setCurrentPage(int currentPage) {
+        this.currentPage = currentPage;
+    }
+
+    /**
+     * @return the totalPages
+     */
+    public int getTotalPages() {
+        return totalPages;
+    }
+
+    /**
+     * @param totalPages the totalPages to set
+     */
+    public void setTotalPages(int totalPages) {
+        this.totalPages = totalPages;
+    }
+
     public void nextPage() {
         this.currentPage++;
 
@@ -39,7 +67,7 @@ public class ReadingSession {
                 "\n\nType A to previous page"+
                 "\nType D to next page"+
                 "\nType S to back to library";
-    }
+            }
 
     /**
      * @return the product
