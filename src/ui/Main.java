@@ -302,7 +302,7 @@ public class Main{
 
                     System.out.println("\nGenre");
                     System.out.print("1. Science Fiction \n2. Fantasy \n3. Historical novel ");  //Validar
-                    nGenre = validateIntInRange(1, 3);
+                    nGenre = validateIntInRange(0, 3);
 
                     System.out.print("\nReview: ");
                     nReview = input.nextLine();
@@ -313,11 +313,11 @@ public class Main{
 
                     System.out.println("\nCategory");
                     System.out.println("1. Varieties \n2. Design \n3. Scientific");
-                    nCategory = validateIntInRange(1, 3);
+                    nCategory = validateIntInRange(0, 3);
 
                     System.out.println("\nIssue frecuency");
                     System.out.print("1. Diary \n2. Weekly \n3. Monthly \n4. Yearly ");
-                    nIssueAmount =validateIntInRange(1, 4);
+                    nIssueAmount =validateIntInRange(0, 4);
 
                     msg = controller.modifyProduct(id,nName, nPagesAmount, nPublishDate, nUrl, nPrice, 0, "0", nCategory, nIssueAmount);
                 }
