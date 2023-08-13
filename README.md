@@ -4,6 +4,20 @@
 
 This project aims to develop a software prototype for ReadX, an "Egyptian conglomerate", to manage their global publication business. The software provides various functionalities for managing bibliographic products and user interactions.
 
+## Table of Contents
+
+- [Functionalities](#functionalities)
+  - [Bibliographic Product Management](#bibliographic-product-management)
+  - [User Management](#user-management)
+  - [Product Purchase and Subscription](#product-purchase-and-subscription)
+  - [Library Presentation](#library-presentation)
+  - [Reading Session Simulation](#reading-session-simulation)
+  - [Report Generation](#report-generation)
+  - [Test Data Generation](#test-data-generation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
 ## Functionalities
 
 ### Bibliographic Product Management
